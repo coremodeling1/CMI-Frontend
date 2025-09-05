@@ -1448,24 +1448,24 @@ html, body, #root {
     font-size: 1.02rem;
     margin: 12px auto 32px auto;
     line-height: 1.75;
-    color:black;
+    color:black !important;
   }
 }
 
 @media (max-width: 480px) {
   .categories-subtext {
     font-size: 0.98rem;
-    color:black;
+    color:black !important;
   }
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .categories-subtext {
-    color: #d4d4d4;
+    color: black !important;
   }
   .categories-subtext strong {
-    color: #ff5a5a;
+    color: black !important;
   }
 }
 
