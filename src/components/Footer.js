@@ -100,7 +100,7 @@ const Footer = () => {
           <p>Email: coremodeling1@gmail.com</p>
           <p>Phone: +91 9876543210</p>
           <p>
-            Address:  1st FLR OFFICE NO-02 SEASONS HARMONY NR AYUSH NX KALYAN WEST 
+            Address:  1st Floor Office No-02 Seasons Harmony Nr. Ayush NX Kalyan West 
             Kalyan West, Maharashtra 421301
           </p>
           <div className="social-icons">
