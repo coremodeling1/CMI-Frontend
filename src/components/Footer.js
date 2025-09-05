@@ -98,7 +98,7 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Contact</h3>
           <p>Email: coremodeling1@gmail.com</p>
-          <p>Phone: +91 9876543210</p>
+          <p>Phone: + 090045 00657</p>
           <p>
             Address:  1st Floor Office No-02 Seasons Harmony Nr. Ayush NX Kalyan West 
             Kalyan West, Maharashtra 421301
