@@ -1,7 +1,7 @@
 .posted-jobs-page {
   max-width: 3280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   font-family: 'Arial', sans-serif;
   background-color:black ;
 }
@@ -63,6 +63,7 @@
 
   .posted-jobs-page h2 {
     font-size: 1.75rem;
+    margin-top: 10px;
   }
 }
 
