@@ -214,6 +214,11 @@
   font-weight: bold;
   margin-right: -133px;
 }
+@media(max-width:1200px){
+  .post-blog-btn {
+    margin-right: -11px;
+  }
+}
 
 .post-blog-btn:hover {
   background-color: #282727;
