@@ -1416,7 +1416,7 @@ html, body, #root {
   font-weight:400;
   font-size: 1.12rem;            /* medium size */
   line-height: 1.85;
-  color: #000000;
+  color:black;
   text-align: justify;
   letter-spacing: 0.2px;
 }
@@ -1425,7 +1425,7 @@ html, body, #root {
 
 .categories-subtext strong {
   font-weight: 800;
-  color: #000000;                /* subtle highlight for key terms */
+  color: black;                /* subtle highlight for key terms */
 }
 
 /* Optional: subtle entrance animation */
@@ -1448,6 +1448,7 @@ html, body, #root {
     font-size: 1.02rem;
     margin: 12px auto 32px auto;
     line-height: 1.75;
+    color:black;
   }
 }
 
