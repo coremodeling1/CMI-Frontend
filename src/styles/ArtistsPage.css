@@ -1,0 +1,220 @@
+.artists-page {
+  padding: 0rem;
+  
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #f9f9f9;
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.artist-card {
+  background: #060505;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.artist-card:hover {
+  transform: translateY(-5px);
+}
+
+.artist-photo {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.artist-video {
+  width: 100%;
+  height: 220px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.artist-card {
+  width: 340px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 18px;
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.artist-photo,
+.artist-video {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  filter:grayscale(100%) ;
+
+}
+
+/* Scrollable info section (vertical only) */
+.artist-info {
+  max-height: 160px; /* adjust as needed */
+  overflow-y: auto;
+  overflow-x: hidden; /* prevent horizontal scroll */
+  padding-right: 5px; /* spacing for scrollbar */
+  word-wrap: break-word; /* wrap long words */
+}
+
+/* Optional scrollbar styling */
+.artist-info::-webkit-scrollbar {
+  width: 6px;
+}
+
+.artist-info::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 3px;
+}
+
+
+.status-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+
+.artist-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.artist-modal-content {
+  background: #000000;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.artist-photos-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.artist-gallery-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+/* Floating media preview */
+.media-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.preview-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.8);
+}
+
+/* 🔍 Search Filter Wrapper */
+.search-filter {
+  display: flex;
+ 
+  margin: 20px 30px 0;
+
+}
+
+/* 🎨 Dropdown Styling */
+.search-filter select {
+  background-color: #000;   /* Black background */
+  color: #fff;              /* White text */
+  border: 2px solid #000;   /* Black border */
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 260px;
+  text-align: center;
+}
+
+/* Hover + Focus Effects */
+.search-filter select:hover,
+.search-filter select:focus {
+  background-color: #111;   /* Slightly lighter black */
+  border-color: #444;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+

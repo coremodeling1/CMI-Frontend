@@ -1,0 +1,125 @@
+.recruiters-page {
+  padding: 0px;
+}
+
+.recruiters-content {
+  max-width: 1540px;
+  margin: auto;
+}
+
+.recruiters-content h1 {
+    background-color: black;
+        padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.recruiter-name{
+    color:black;
+}
+.recruiters-content p {
+    background-color: black;
+    padding-top: 15px;
+    border-radius: 3%;
+    padding-bottom: 15px;
+}
+
+.recruiters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.recruiter-card {
+  background: #d6d6d6;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  width:450px;
+  margin-left: 20px;
+  margin-bottom: 84px;
+}
+
+@media (max-width:992px) {
+  .recruiter-card{
+        width: 338px;
+  }
+  
+}
+.recruiter-card:hover {
+  transform: translateY(-5px);
+}
+
+.recruiter-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+ border: 2px solid black
+}
+
+/* Status badge */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+.status-badge.granted {
+  background: #d4edda;
+  color: #155724;
+}
+.status-badge.denied {
+  background: #f8d7da;
+  color: #721c24;
+}
+.status-badge.none {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.btn.grant {
+  background: #333534;
+  color: white;
+}
+.btn.grant:hover {
+  background: #218838;
+}
+.btn.grant.active {
+  background: #000000;
+}
+
+.btn.deny {
+  background: #dc3545;
+  color: white;
+}
+.btn.deny:hover {
+  background: #c82333;
+}
+.btn.deny.active {
+  background: #a71d2a;
+}

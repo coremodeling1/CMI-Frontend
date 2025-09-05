@@ -1,0 +1,54 @@
+.applied-jobs-page {
+  padding: 0px;
+  background: #f8f8f8;
+  min-height: 100vh;
+}
+
+.applied-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #fffafa;
+  background-color: #070707;
+     font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:400;
+  padding:30px;
+  margin-top: 0px;
+}
+
+.applied-jobs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.applied-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  margin-left: 40px;
+}
+
+.applied-card:hover {
+  transform: translateY(-5px);
+}
+
+.applied-card h3 {
+  margin-bottom: 10px;
+  color: #050505;
+}
+
+.applied-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.no-applied {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}

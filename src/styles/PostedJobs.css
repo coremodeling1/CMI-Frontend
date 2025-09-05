@@ -1,0 +1,123 @@
+.posted-jobs-page {
+  max-width: 3280px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color:black ;
+}
+
+.posted-jobs-page h2 {
+  text-align: center;
+ margin-top: -10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #000000;
+  font-size: 2rem;
+  background-color: white;
+}
+
+/* Container for all cards */
+.job-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px; /* space between cards */
+}
+
+.job-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+.job-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #080808;
+}
+.job-card p {
+  margin-bottom: 8px;
+  color: #000000;
+  line-height: 1.4;
+  word-wrap: break-word;   /* ✅ breaks long words */
+  overflow-wrap: break-word; /* ✅ modern way */
+  white-space: normal;     /* ✅ allow wrapping */
+}
+
+.job-card strong {
+  color: #333;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 768px) {
+  .job-card {
+    padding: 15px;
+  }
+
+  .posted-jobs-page h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .posted-jobs-page {
+    padding: 10px;
+  }
+
+  .job-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .job-card p {
+    font-size: 0.9rem;
+  }
+}
+
+.applicants-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #be1212; /* red background */
+  border-radius: 10px;
+  color: #fff; /* white text for readability */
+}
+
+.applicants-section h3 {
+  color: #fff; /* ensure the heading is visible */
+  margin-bottom: 20px;
+}
+
+.applicant-card {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #fff; /* keep card white */
+  color: #333; /* dark text inside the card for readability */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.applicant-card a {
+  color: #c70c0c; /* make CV link visible */
+  text-decoration: underline;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: red;
+  color: rgb(18, 16, 16);
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 4px 8px;
+  min-width: 20px;
+  text-align: center;
+}

@@ -1,0 +1,251 @@
+.blogs-body{
+  background-color: #000000;
+}
+
+
+.admin-blogs-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #000000; /* black background for page */
+}
+
+/* Floating blog form overlay as a white card */
+.blog-form {
+  position: fixed; /* float above everything */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* center the form */
+  background-color: #fff; /* white background */
+  border: 2px solid #f8f8f8; /* red border */
+  border-radius: 15px;
+  padding: 40px 30px;
+  z-index: 1000; /* make sure it overlays everything */
+  width: 1000px; /* bigger form */
+  height:500px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3); /* stronger shadow with red glow */
+}
+
+/* Inputs styling for white card */
+.blog-input,
+.blog-textarea,
+.blog-file {
+  margin-bottom: 15px;
+  padding: 32px;
+  border-radius: 8px;
+  border: 1px solid #ffffff; /* red border */
+  background-color: #fff; /* white background */
+  color: #000; /* black text */
+  font-weight: 500;
+}
+
+/* Submit button */
+.blog-submit-btn {
+  padding: 12px 25px;
+  border: none;
+  background-color: #000000; /* red button */
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+  
+}
+
+.blog-submit-btn:hover {
+  background-color: #000000;
+}
+
+/* Optional: semi-transparent dark overlay behind form */
+.blog-form::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-dark overlay */
+  z-index: -1; /* behind the form */
+}
+
+
+
+/* Sidebar layout */
+.sidebar-layout .blogs-sidebar-container {
+  display: flex;
+  gap: 80px;
+  margin-top: -70px;
+}
+
+/* Sidebar */
+.blogs-sidebar {
+  width: 350px;
+  background-color: #f2eded;
+  border: 1px solid #7c0303;
+  border-radius: 8px;
+  padding: 10px;
+  margin-left: -140px;
+  margin-top: 10px;
+
+  /* Fixed height with independent scroll */
+  height: 600px; /* fixed height */
+  overflow-y: auto; /* vertical scroll */
+  overflow-x: hidden; /* hide horizontal scroll */
+}
+
+@media (max-width:468px) {
+  .blogs-sidebar {
+  margin-left:12px !important;
+  height: 300px !important;
+  width:300px !important;
+}
+.selected-blog .blog-image {
+  margin-left: 36px !important;
+}
+}
+
+@media (max-width:1200px) {
+  .blogs-sidebar {
+    width: 662px ;
+    margin-left: 46px !important;
+    margin-top: 10px;
+    height: 400px;
+}
+  
+.selected-blog .blog-image{
+  margin-left:70px;
+}
+}
+/* Scrollbar styling for sidebar */
+.blogs-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blogs-sidebar::-webkit-scrollbar-thumb {
+  background-color: #630303;
+  border-radius: 4px;
+}
+
+/* Sidebar heading */
+.sidebar-heading {
+  color: #000000;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+/* Blog title items */
+.blog-title-item {
+  padding: 10px;
+  cursor: pointer;
+  color: #000000;
+  border-bottom: 1px solid #333;
+}
+
+.blog-title-item.active {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Content area */
+.blogs-content {
+  flex: 1;
+
+  /* Fixed height with independent scroll */
+  max-height: 600px; /* same height as sidebar */
+  overflow-y: auto;
+  padding-right: 10px; /* space for scrollbar */
+}
+
+/* Scrollbar styling for content */
+.blogs-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blogs-content::-webkit-scrollbar-thumb {
+  background-color: #aeaaaa; /* black for content scrollbar */
+  border-radius: 4px;
+}
+
+/* Selected blog styling */
+.selected-blog .blog-title {
+  font-weight: bold;
+  color: #fbf9f9;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.selected-blog .blog-image {
+  width: 80%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.selected-blog .blog-content p {
+  text-align: justify;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+
+
+
+.post-blog-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.post-blog-btn {
+  background-color: #ffffff; /* orange-red */
+  color: rgb(0, 0, 0);
+  padding: 15px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: -133px;
+}
+
+.post-blog-btn:hover {
+  background-color: #282727;
+  color: #ffffff;
+}
+
+.delete-blog-btn {
+  background-color: #ffffff; /* Red for danger */
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.delete-blog-btn:hover {
+  background-color: #d62828; /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+.delete-blog-btn:active {
+  background-color: #a4161a; /* Even darker on click */
+  transform: scale(0.97);
+}
+
+.delete-blog-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}

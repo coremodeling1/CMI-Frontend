@@ -1,0 +1,316 @@
+.projects-page {
+  padding: 0px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Page title */
+.projects-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 30px 0;
+  letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:400;
+  background-color: #000000;
+  padding:30px;
+  margin-top: 0px;
+}
+
+/* Projects grid */
+.projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: flex-start; /* start from left */
+  padding: 0 20px;
+}
+
+/* Individual project card */
+.project-card {
+  background: linear-gradient(145deg, #ffffff, #eaeaea);
+  border-radius: 15px;
+  padding: 25px;
+  width: 340px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 20px;
+
+    /* ✅ Fix for text overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+}
+
+.project-card h3 {
+  font-size: 1.3rem;
+  color: #000000;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 5px 0;
+}
+
+.project-card strong {
+  color: #000;
+}
+
+/* No jobs message */
+.no-jobs {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 40px;
+}
+
+
+/* ✅ Applied Jobs button (top-right corner) */
+.applied-jobs-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 40px 0 0; /* space from top-right */
+}
+
+.applied-jobs-btn {
+  background-color: #000000; /* orange */
+  color: white;
+  font-weight: bold;
+  padding: 18px 22px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: -21px;
+}
+
+.applied-jobs-btn:hover {
+  background-color: #4a4948;
+  transform: translateY(-2px);
+}
+
+/* ✅ Applied button (inside job cards) */
+.applied-btn {
+  background-color: #6d6f6d; /* green */
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+
+.apply-btn {
+  background: #c00808;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+.apply-btn:hover {
+  background: #6d0505;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 450px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.apply-form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.submit-btn {
+  background: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #f87171;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Modal overlay background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Modal form container */
+.modal-form {
+  background: #fff;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh; /* 🔥 prevents overflow */
+  overflow-y: auto; /* 🔥 scrolls if content too tall */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Heading */
+.form-heading {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #222; /* black-ish */
+  text-align: center;
+}
+
+/* Labels */
+.apply-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000; /* 🔥 force black */
+}
+
+/* Inputs */
+.apply-form input[type="text"],
+.apply-form input[type="email"],
+.apply-form input[type="date"],
+.apply-form input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Buttons */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.submit-btn {
+  background: #1e1e2f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit-btn:hover {
+  background: #33334d;
+}
+
+.cancel-btn:hover {
+  background: #aaa;
+}
+
+/* Small animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 🔎 Search Bar Styling */
+.search-bar {
+  display: flex;
+
+  margin: 20px 8px;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #000;   /* Black background */
+  color: #fff;        /* White text */
+  text-align: center;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+

@@ -1,0 +1,133 @@
+/* Wrapper */
+.homepage-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Section with background */
+.homepage-hero-section {
+  background-image: url("../images/slide1.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 80px 20px;
+  color: white;
+}
+
+.homepage-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+/* Hero Text */
+.homepage-hero {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.homepage-hero h1 {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  color: #ffffff;
+      font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:600;
+}
+
+.homepage-hero span {
+  color: #ffffff;
+}
+
+.homepage-subtext {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #f1f1f1;
+}
+
+.homepage-user-greet {
+  margin: 10px 0;
+  font-style: italic;
+   font-size: 26px;
+}
+
+.homepage-btn {
+  margin-top: 15px;
+  padding: 10px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  background: #c0392b;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.homepage-btn:hover {
+  background: #a93226;
+}
+
+/* Features Section */
+.homepage-features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.homepage-feature-card {
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.homepage-feature-card:hover {
+  transform: translateY(-8px);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.homepage-feature-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #fff;
+     font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:600;
+}
+
+.homepage-feature-card p {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+
+.user-greet{
+       font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:400;
+  font-size: 2.2rem;
+}
+
+@media (max-width:486px) {
+  .homepage-hero h1 {
+    font-size: 2.5rem;
+}
+  
+}

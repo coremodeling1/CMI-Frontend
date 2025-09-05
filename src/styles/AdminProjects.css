@@ -1,0 +1,102 @@
+.jobs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 20px;
+  justify-content: flex-start; /* start from left */
+  margin-bottom: 214px;
+}
+
+.job-card {
+  background: linear-gradient(145deg, #fefefe, #e0e0e0);
+  border-radius: 15px;
+  padding: 25px;
+  width: 320px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+}
+
+.job-card h3 {
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #d12424;
+  padding-bottom: 5px;
+}
+
+.job-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 5px 0;
+}
+
+.status-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.approve-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.approve-btn:hover {
+  background-color: #000000;
+  transform: scale(1.03);
+}
+
+.reject-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.03);
+}
+
+.status-label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.status-label.approved {
+  color: #060606;
+}
+
+.status-label.rejected {
+  color: #dc3545;
+}
+
+.page-title {
+  text-align: center;      /* centers the text horizontally */
+  font-size: 2rem;         /* increase font size */
+  font-weight: 700;        /* make it bold */
+  color: #ffffff;       /* top and bottom spacing */
+  letter-spacing: 1px;     /* optional spacing for style */
+  background-color: #000000;
+       font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight:400;
+  padding: 20px;
+  margin-top :0px;
+ 
+
+}

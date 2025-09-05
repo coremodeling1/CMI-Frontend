@@ -1,0 +1,108 @@
+
+.blogs-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0px;
+  background-color: #000000; /* black background */
+  margin-top: 70px;
+}
+
+/* Sidebar layout */
+.sidebar-layout .blogs-sidebar-container {
+  display: flex;
+  gap: 80px;
+  margin-top: -70px;
+}
+
+/* Sidebar */
+.blogs-sidebar {
+  width: 350px;
+  background-color: #ffffff;
+  border: 1px solid #ff0000;
+  border-radius: 8px;
+  padding: 10px;
+  margin-left: -160px;
+
+  /* Fixed height with independent scroll */
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling for sidebar */
+.blogs-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blogs-sidebar::-webkit-scrollbar-thumb {
+  background-color: #ff0000;
+  border-radius: 4px;
+}
+
+/* Sidebar heading */
+.sidebar-heading {
+  color: #8d0505;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+/* Blog title items */
+.blog-title-item {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  border-bottom: 1px solid #333;
+}
+
+.blog-title-item.active {
+  background-color: #ff0000;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Content area */
+.blogs-content {
+  flex: 1;
+
+  /* Fixed height with independent scroll */
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Scrollbar styling for content */
+.blogs-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blogs-content::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 4px;
+}
+
+/* Selected blog styling */
+.selected-blog .blog-title {
+  font-weight: bold;
+  color: #ff0000;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.selected-blog .blog-image {
+  width: 80%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.selected-blog .blog-content p {
+  text-align: justify;
+  color: #fff;
+  line-height: 1.6;
+}
+
+

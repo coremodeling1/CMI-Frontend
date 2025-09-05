@@ -1,0 +1,185 @@
+.buy-premium-page {
+  background: url("../images/profilebg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buy-premium-content {
+  flex: 1;
+  padding: 40px 20px;
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.6); /* black overlay for readability */
+}
+
+.about-section {
+  max-width: 1400px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+
+}
+
+.about-section h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #000000;
+  text-align: justify;
+}
+
+.premium-section {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.premium-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.premium-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+.premium-section ul li {
+  font-size: 1.1rem;
+  margin: 12px 0;
+  color: #eee;
+  text-align: left;
+  width:847px;
+}
+
+
+.convince-text {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #ccc;
+  text-align: justify;
+}
+
+.contact-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.contact-box a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.contact-box a:hover {
+  text-decoration: underline;
+}
+
+
+/* ----------------- RESPONSIVE ----------------- */
+
+/* Tablets (max-width: 992px) */
+@media (max-width: 992px) {
+  .about-section {
+    display: flex;
+    flex-direction: column; /* ✅ stack heading & text */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .about-section h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+    display: block;
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  .premium-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .premium-section ul li {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .convince-text {
+    font-size: 1rem;
+  }
+}
+
+
+/* Mobiles (max-width: 600px) */
+@media (max-width: 600px) {
+  .buy-premium-content {
+    padding: 20px 15px;
+    text-align: center; /* centers everything */
+  }
+
+  .about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+  }
+
+  .about-section h1 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  .about-section p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    max-width: 95%;
+  }
+
+  .premium-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .premium-section ul li {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding-left: 0; /* center align items */
+    text-align:justify;
+  }
+
+  .convince-text {
+    font-size: 0.95rem;
+    margin: 15px 0;
+  }
+
+  .contact-box {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 12px 15px;
+    margin-top: 10px;
+  }
+
+  .contact-box a {
+    font-size: 0.95rem;
+    word-break: break-word;
+  }
+}
