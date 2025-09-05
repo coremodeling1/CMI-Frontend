@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/ArtistsPage.css";
 
-const backendURL = "http://localhost:5000";
+const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const AdminArtistsPage = () => {
   const [artists, setArtists] = useState([]);

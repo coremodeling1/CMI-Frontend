@@ -11,7 +11,7 @@ const Blogs = () => {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const res = await axios.get("https://cmi-backend-6xf1.onrender.com/api/blogs");
       setBlogs(res.data);
       if (res.data.length > 0) setSelectedBlog(res.data[0]);
     } catch (err) {

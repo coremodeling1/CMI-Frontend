@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/PostedJobs.css";
 
-const backendURL = "http://localhost:5000";
+const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const PostedJobs = () => {
   const [jobs, setJobs] = useState([]);

@@ -78,7 +78,7 @@ const stepsData = [
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const res = await axios.post("https://cmi-backend-6xf1.onrender.com/api/auth/login", formData);
 
       if (res && res.data) {
         localStorage.setItem("user", JSON.stringify(res.data));

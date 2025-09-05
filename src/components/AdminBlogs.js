@@ -15,7 +15,7 @@ const AdminBlogs = () => {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const res = await axios.get("https://cmi-backend-6xf1.onrender.com/api/blogs");
       setBlogs(res.data);
       if (res.data.length > 0) setSelectedBlog(res.data[0]);
     } catch (err) {
@@ -41,7 +41,7 @@ const AdminBlogs = () => {
     if (!token) return alert("You must be logged in as admin to post a blog");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/blogs", formData, {
+      const res = await axios.post("https://cmi-backend-6xf1.onrender.com/api/blogs", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const AdminBlogs = () => {
     if (!token) return alert("You must be logged in as admin to delete a blog");
 
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${blogId}`, {
+      await axios.delete(`https://cmi-backend-6xf1.onrender.com/api/blogs/${blogId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

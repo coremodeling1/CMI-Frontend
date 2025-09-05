@@ -9,7 +9,7 @@ const Recruiters = () => {
   useEffect(() => {
     const fetchRecruiters = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/recruiters");
+        const res = await fetch("https://cmi-backend-6xf1.onrender.com/api/auth/recruiters");
         const data = await res.json();
         setRecruiters(data);
       } catch (err) {
@@ -30,7 +30,7 @@ const Recruiters = () => {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/auth/recruiters/${id}/premium`,
+      `https://cmi-backend-6xf1.onrender.com/api/auth/recruiters/${id}/premium`,
       {
         method: "PUT",
         headers: {

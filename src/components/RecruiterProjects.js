@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/RecruiterProjects.css";
 
-const backendURL = "http://localhost:5000";
+const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const RecruiterProjects = () => {
    const navigate = useNavigate(); // 👈 hook for navigation

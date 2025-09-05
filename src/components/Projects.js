@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import "../styles/Projects.css";
 import "../styles/responsive.css"
 
-const backendURL = "http://localhost:5000";
+const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const Projects = () => {
   const [jobs, setJobs] = useState([]);

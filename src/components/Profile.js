@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import "../styles/Profile.css";
 import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
-const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:5000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://cmi-backend-6xf1.onrender.com";
 
 // Format date as dd-mm-yyyy
 const formatDate = (dateString) => {
