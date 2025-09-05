@@ -219,6 +219,11 @@
     margin-right: -11px;
   }
 }
+@media(max-width:468px){
+   .blogs-sidebar{
+     margin-left:0px !important;
+   }
+}
 
 .post-blog-btn:hover {
   background-color: #282727;
