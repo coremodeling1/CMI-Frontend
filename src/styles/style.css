@@ -420,6 +420,10 @@ body {
 .social-icons a {
   color: #000;
 }
+.social-icons a:hover {
+  color: #000;
+}
+
 
 .social-icons svg:hover {
   color: #000;
