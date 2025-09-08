@@ -262,7 +262,7 @@ const HomePage = () => {
         </div>
       ))
     ) : (
-      <p>Loading Instagram feed...</p>
+      <p>Loading Instagram feed....</p>
     )}
   </div>
 </section>
