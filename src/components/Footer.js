@@ -95,22 +95,48 @@ const Footer = () => {
         </div>
 
         {/* Contact */}
-        <div className="footer-section">
-          <h3>Contact</h3>
-          <p>Email: coremodeling1@gmail.com</p>
-          <p>Phone: + 090045 00657</p>
-          <p>
-            Address:  1st Floor Office No-02 Seasons Harmony Nr. Ayush NX Kalyan West 
-            Kalyan West, Maharashtra 421301
-          </p>
-          <div className="social-icons">
-            <FaFacebook />
-            <FaTwitter />
-            <FaInstagram />
-            <FaLinkedin />
-          </div>
-        </div>
-      </div>
+   <div className="footer-section">
+  <h3>Contact</h3>
+  <p>Email: coremodeling1@gmail.com</p>
+  <p>Phone: +91 9876543210</p>
+  <p>
+    Address: 1st FLR OFFICE NO-02 SEASONS HARMONY NR AYUSH NX KALYAN WEST,
+    Kalyan West, Maharashtra 421301
+  </p>
+
+  <div className="social-icons">
+    <a 
+      href="https://www.facebook.com/share/16zd7Y7viJ/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaFacebook />
+    </a>
+    <a 
+      href="" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaTwitter />
+    </a>
+    <a 
+      href="https://www.instagram.com/core_modelling/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaInstagram />
+    </a>
+    <a 
+      href="" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaLinkedin />
+    </a>
+  </div>
+</div>
+</div>
+
 
       {/* Bottom strip */}
       <p className="footer-bottom">
