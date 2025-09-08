@@ -49,34 +49,9 @@ const HomePage = () => {
   
   
     const [activeIndex, setActiveIndex] = useState(0);
-    const [instagramPosts, setInstagramPosts] = useState([]);
+   
   
   
-
-useEffect(() => {
-  const accessToken = process.env.REACT_APP_IG_ACCESS_TOKEN;  
-  const userId = process.env.REACT_APP_IG_USER_ID;
-
-  async function fetchInstagramFeed() {
-    try {
-    const res = await fetch(
-  `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${accessToken}`
-);
-
-    const data = await res.json();
-if (data.error) {
-  console.error("Instagram API error:", data.error);
-} else if (data.data) {
-  setInstagramPosts(data.data.slice(0, 5));
-}
-
-    } catch (error) {
-      console.error("Error fetching Instagram feed:", error);
-    }
-  }
-
-  fetchInstagramFeed();
-}, []);
 
 
   
@@ -242,30 +217,6 @@ if (data.error) {
 
 
 
-    <section className="instagram-section">
-  <h2 className="insta-h2">Connect With Us On Instagram</h2>
-  <div className="feed">
-    {instagramPosts.length > 0 ? (
-      instagramPosts.map((item) => (
-        <div
-          key={item.id}
-          className="feed-item"
-          onClick={() => window.open(item.permalink, "_blank")}
-        >
-          {item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM" ? (
-            <img src={item.media_url} alt="Instagram Post" />
-          ) : item.media_type === "VIDEO" ? (
-            <video autoPlay muted loop controls>
-              <source src={item.media_url} type="video/mp4" />
-            </video>
-          ) : null}
-        </div>
-      ))
-    ) : (
-      <p>Loading Instagram feed...</p>
-    )}
-  </div>
-</section>
 
 
 
