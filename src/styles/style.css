@@ -1486,3 +1486,56 @@ html, body, #root {
     margin-top: 0px;
    }
 }
+
+
+
+
+
+.instagram-section {
+  text-align: center;
+  padding: 20px;
+  max-width: 1548px;
+  background-color: #d0d0d0;
+}
+
+.insta-h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.feed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+  gap: 15px;
+
+}
+
+.feed-item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* makes all posts square */
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.feed-item img,
+.feed-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops image nicely */
+  border-radius: 10px;
+  filter: grayscale(100%); /* makes images/videos black and white */
+  transition: filter 0.3s ease; /* optional smooth effect */
+}
+
+/* Optional: make color appear on hover */
+.feed-item:hover img,
+.feed-item:hover video {
+  filter: grayscale(0%);
+}
+
+.feed-item:hover {
+  transform: scale(1.05);
+}
