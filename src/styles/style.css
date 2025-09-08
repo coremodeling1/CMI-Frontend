@@ -417,6 +417,10 @@ body {
   color:black;
 }
 
+.social-icons a {
+  color: #000;
+}
+
 .social-icons svg:hover {
   color: #ff4d4d;
 }
