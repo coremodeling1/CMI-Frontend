@@ -302,7 +302,33 @@ return (
   </div>
 </section>
 
-  
+
+
+<section className="instagram-section">
+  <h2 className="insta-h2">Connect With Us On Instagram</h2>
+  <div className="feed">
+    {instagramPosts.length > 0 ? (
+      instagramPosts.map((item) => (
+        <div
+          key={item.id}
+          className="feed-item"
+          onClick={() => window.open(item.permalink, "_blank")}
+        >
+          {item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM" ? (
+            <img src={item.media_url} alt="Instagram Post" />
+          ) : item.media_type === "VIDEO" ? (
+            <video autoPlay muted loop controls>
+              <source src={item.media_url} type="video/mp4" />
+            </video>
+          ) : null}
+        </div>
+      ))
+    ) : (
+      <p>Loading Instagram feed...</p>
+    )}
+  </div>
+</section>
+
 
 
 
