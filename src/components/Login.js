@@ -18,6 +18,7 @@ const Login = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [instagramPosts, setInstagramPosts] = useState([]);
   const navigate = useNavigate();
 
   const slides = [slide1, slide1, slide1];
@@ -94,6 +95,35 @@ const stepsData = [
     }
   };
 
+
+
+
+
+  
+useEffect(() => {
+  const accessToken = process.env.REACT_APP_IG_ACCESS_TOKEN;  
+  const userId = process.env.REACT_APP_IG_USER_ID;
+
+  async function fetchInstagramFeed() {
+    try {
+    const res = await fetch(
+  `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${accessToken}`
+);
+
+    const data = await res.json();
+if (data.error) {
+  console.error("Instagram API error:", data.error);
+} else if (data.data) {
+  setInstagramPosts(data.data.slice(0, 5));
+}
+
+    } catch (error) {
+      console.error("Error fetching Instagram feed:", error);
+    }
+  }
+
+  fetchInstagramFeed();
+}, []);
 
 
   
