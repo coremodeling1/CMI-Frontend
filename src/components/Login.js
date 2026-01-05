@@ -11,9 +11,9 @@ import Signup from "./Signup";
 import logo from "../images/logo.png";
 import "../styles/responsive.css"
 import Footer from "./Footer";   // ✅ Import Footer
-import applyProject from "/images/apply-project.jpeg"
-import artist from "/images/artist.jpeg"
-import gallery from "/images/gallery.jpeg"
+import applyProject from "../images/apply-project.jpeg"
+import artist from "../images/artist.jpeg"
+import gallery from "../images/gallery.jpeg"
 import postProject from "../images/post-project.jpeg"
 
 const Login = () => {
