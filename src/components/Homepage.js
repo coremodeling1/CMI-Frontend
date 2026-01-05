@@ -189,6 +189,7 @@ const HomePage = () => {
         {/* Right side - Image + description */}
         <div className="steps-content">
           <img
+            key={stepsData[activeIndex].img}
             src={stepsData[activeIndex].img}
             alt={stepsData[activeIndex].title}
             className="step-image"
