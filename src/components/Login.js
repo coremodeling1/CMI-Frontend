@@ -11,6 +11,10 @@ import Signup from "./Signup";
 import logo from "../images/logo.png";
 import "../styles/responsive.css"
 import Footer from "./Footer";   // ✅ Import Footer
+import applyProject from "/images/apply-project.jpeg"
+import artist from "/images/artist.jpeg"
+import gallery from "/images/gallery.jpeg"
+import postProject from "../images/post-project.jpeg"
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -40,25 +44,25 @@ const stepsData = [
     desc: "Both Recruiters and Artists can create an account and log in to start using CoreModeling.",
   },
   {
-    img: "/images/explore-artists.png",
-    title: "Explore Artists",
-    desc: "Recruiters can browse artist profiles, view their portfolios, photos, and videos.",
-  },
-  {
-    img: "/images/upload-projects.png",
-    title: "Upload Projects",
-    desc: "Recruiters can upload exciting modeling projects for artists to discover and apply to.",
-  },
-  {
-    img: "/images/apply-projects.png",
-    title: "Apply to Projects",
-    desc: "Artists can explore available projects and send their applications directly through the platform.",
-  },
-  {
-    img: "/images/gallery.png",
-    title: "Build Your Gallery",
-    desc: "Artists can upload photos and videos to their personal gallery to showcase their talent.",
-  },
+      img: artist,
+      title: "Explore Artists",
+      desc: "Recruiters can browse artist profiles, view their portfolios, photos, and videos.",
+    },
+    {
+      img: postProject,
+      title: "Upload Projects",
+      desc: "Recruiters can upload exciting modeling projects for artists to discover and apply to.",
+    },
+    {
+      img: applyProject,
+      title: "Apply to Projects",
+      desc: "Artists can explore available projects and send their applications directly through the platform.",
+    },
+    {
+      img: gallery,
+      title: "Build Your Gallery",
+      desc: "Artists can upload photos and videos to their personal gallery to showcase their talent.",
+    },
 ];
 
 
