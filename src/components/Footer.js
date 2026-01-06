@@ -112,13 +112,13 @@ const Footer = () => {
     >
       <FaFacebook />
     </a>
-    <a 
+    {/* <a 
       href="" 
       target="_blank" 
       rel="noopener noreferrer"
     >
       <FaTwitter />
-    </a>
+    </a> */}
     <a 
       href="https://www.instagram.com/core_modelling/" 
       target="_blank" 
@@ -126,13 +126,13 @@ const Footer = () => {
     >
       <FaInstagram />
     </a>
-    <a 
+    {/* <a 
       href="" 
       target="_blank" 
       rel="noopener noreferrer"
     >
       <FaLinkedin />
-    </a>
+    </a> */}
   </div>
 </div>
 </div>
