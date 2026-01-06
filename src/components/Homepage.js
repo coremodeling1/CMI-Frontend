@@ -243,6 +243,140 @@ const HomePage = () => {
 </section>
 
 
+<section className="faq-section">
+  <div className="faq-wrapper">
+    <h2 className="faq-heading">Frequently Asked Questions</h2>
+    <p className="faq-subtext">
+      Everything you need to know about using CoreModeling as an Artist or Recruiter
+    </p>
+
+    <div className="faq-container">
+      
+      {/* ARTIST FAQ */}
+      <div className="faq-column">
+        <h3 className="faq-title">For Artists</h3>
+
+        <details>
+          <summary>I’m a fresher, how can I start?</summary>
+          <p>
+            Freshers can start by creating a complete profile, selecting the right category,
+            and uploading photos, videos, or portfolios. Even without experience, showcasing
+            talent and consistency helps attract recruiters.
+          </p>
+        </details>
+
+        <details>
+          <summary>How will I get work?</summary>
+          <p>
+            Recruiters post projects regularly. Artists can browse projects and apply directly.
+            A strong profile increases visibility and selection chances.
+          </p>
+        </details>
+
+        <details>
+          <summary>How can I build a stable career?</summary>
+          <p>
+            Stay active, update your portfolio frequently, apply consistently,
+            and maintain professionalism. Growth happens with patience and quality work.
+          </p>
+        </details>
+
+        <details>
+          <summary>What kind of projects do you usually get?</summary>
+          <p>
+            Projects include modeling shoots, ad campaigns, fashion shows, short films,
+            music videos, brand promotions, and social media collaborations.
+          </p>
+        </details>
+
+        <details>
+          <summary>How do you match artists to roles?</summary>
+          <p>
+            Matching is done based on category, skills, portfolio quality,
+            experience, and project requirements.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do you charge any registration or onboarding fees?</summary>
+          <p>
+            No. Artist registration and onboarding on CoreModeling are completely free.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do you promise guaranteed work or roles?</summary>
+          <p>
+            No platform can guarantee work. CoreModeling provides opportunities,
+            visibility, and connections — final selection depends on recruiters.
+          </p>
+        </details>
+      </div>
+
+      {/* RECRUITER FAQ */}
+      <div className="faq-column">
+        <h3 className="faq-title">For Recruiters</h3>
+
+        <details>
+          <summary>Is posting a project free?</summary>
+          <p>
+            Yes. Recruiters can post projects completely free of cost on CoreModeling.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I view artist profiles for free?</summary>
+          <p>
+            You can browse categories and listings for free. Viewing full artist profiles,
+            portfolios, photos, and videos requires a Premium plan.
+          </p>
+        </details>
+
+        <details>
+          <summary>What do I get with the Premium plan?</summary>
+          <p>
+            Premium access allows you to view complete artist profiles, portfolios,
+            media galleries, and directly contact shortlisted artists.
+          </p>
+        </details>
+
+        <details>
+          <summary>What kind of artists are available?</summary>
+          <p>
+            Models, actors, influencers, musicians, photographers, dancers,
+            writers, filmmakers, and other creative professionals.
+          </p>
+        </details>
+
+        <details>
+          <summary>How does the application process work?</summary>
+          <p>
+            Artists apply to your projects. With Premium access, you can review
+            applications and connect directly with selected candidates.
+          </p>
+        </details>
+
+        <details>
+          <summary>Is Premium required to hire artists?</summary>
+          <p>
+            Yes. Premium is required to view detailed profiles and communicate
+            directly with artists.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do you guarantee successful hiring?</summary>
+          <p>
+            CoreModeling simplifies hiring but does not guarantee selection.
+            Final hiring decisions depend on project needs and mutual agreement.
+          </p>
+        </details>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 
 

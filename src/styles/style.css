@@ -1546,3 +1546,104 @@ html, body, #root {
 .feed-item:hover {
   transform: scale(1.05);
 }
+
+
+
+/* FAQ Section */
+.faq-section {
+  background: #ffffff;
+  padding: 90px 20px;
+}
+
+.faq-wrapper {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.faq-heading {
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.faq-subtext {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 60px;
+}
+
+.faq-container {
+  display: flex;
+  gap: 50px;
+}
+
+.faq-column {
+  flex: 1;
+}
+
+.faq-title {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #000;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+}
+
+/* Accordion */
+.faq-column details {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.faq-column details:hover {
+  border-color: #000;
+}
+
+.faq-column summary {
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  color: #000;
+}
+
+.faq-column summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-column details p {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .faq-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .faq-heading {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-heading {
+    font-size: 2rem;
+  }
+
+  .faq-subtext {
+    font-size: 1rem;
+  }
+}
