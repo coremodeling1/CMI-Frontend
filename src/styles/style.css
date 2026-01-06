@@ -1591,6 +1591,7 @@ html, body, #root {
   color: #000;
   font-family: "Playfair Display", serif;
   font-weight: 600;
+   text-align: center;
 }
 
 /* Accordion */
@@ -1613,6 +1614,7 @@ html, body, #root {
   cursor: pointer;
   list-style: none;
   color: #000;
+   text-align: center;
 }
 
 .faq-column summary::-webkit-details-marker {
