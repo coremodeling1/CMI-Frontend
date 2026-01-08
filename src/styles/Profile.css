@@ -260,7 +260,7 @@ textarea {
 /* 📱 Responsive fixes for screens <= 468px */
 @media (max-width: 468px) {
   .profile-info-card {
-    width: 70% !important;  /* full width */
+    width: 100% !important;  /* full width */
     margin-left: 30px !important  ;        /* add breathing space */
     padding: 15px;
    

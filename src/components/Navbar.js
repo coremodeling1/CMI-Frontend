@@ -85,12 +85,12 @@ return (
           onClick={() => navigate("/profile")}
           style={{ cursor: "pointer" }}
         >
-          <img
+          {/* <img
             src={user.profilePic || "/default-avatar.png"}
             alt="Profile"
             className="profile-avatar"
           />
-          <p className="profile-text">Your Profile</p>
+          <p className="profile-text">Your Profile</p> */}
         </div>
       )}
 
