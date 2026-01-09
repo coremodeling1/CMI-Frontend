@@ -7,6 +7,8 @@ const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const AdminProjects = () => {
   const [jobs, setJobs] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("all"); // ✅ filter state
+
   const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchJobs = useCallback(async () => {
@@ -53,13 +55,33 @@ const AdminProjects = () => {
     }
   };
 
+    // ✅ Apply filter
+  const filteredJobs = jobs.filter((job) => {
+    if (statusFilter === "all") return true;
+    return job.status === statusFilter;
+  });
+
   return (
     <div className="admin-projects-page">
       <Navbar />
   <h1 className="page-title">Admin - Manage Projects</h1>
+
+ {/* ✅ FILTER */}
+      <div className="filters">
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
+          <option value="all">All Projects</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+
       <div className="jobs-list">
-        {jobs.length > 0 ? (
-          jobs.map((job) => (
+        {filteredJobs.length > 0 ? (
+          filteredJobs.map((job) => (
             <div className="job-card" key={job._id}>
               <h3>{job.jobTitle}</h3>
               <p><strong>Description:</strong> {job.jobDescription}</p>
