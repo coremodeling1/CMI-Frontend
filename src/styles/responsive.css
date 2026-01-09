@@ -519,7 +519,7 @@ footer {
 }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .profile-text {
     display: none;
   }
@@ -527,4 +527,4 @@ footer {
   .profile-avatar {
     display: none;
   }
-}
+} */
