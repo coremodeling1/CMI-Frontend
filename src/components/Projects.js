@@ -1,11 +1,11 @@
 // src/pages/Projects.js
 import React, { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";   // 👈 for navigation
+import { useNavigate } from "react-router-dom"; // 👈 for navigation
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/Projects.css";
-import "../styles/responsive.css"
+import "../styles/responsive.css";
 
 const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
@@ -15,7 +15,6 @@ const Projects = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [formData, setFormData] = useState({
-
     fullName: "",
     email: "",
     contact: "",
@@ -50,7 +49,9 @@ const Projects = () => {
   const fetchAppliedJobs = async () => {
     if (!loggedInUser) return;
     try {
-      const res = await fetch(`${backendURL}/api/applications/user/${loggedInUser._id}`);
+      const res = await fetch(
+        `${backendURL}/api/applications/user/${loggedInUser._id}`
+      );
       const data = await res.json();
       setAppliedJobs(data.map((app) => app.job._id)); // store only jobIds
     } catch (err) {
@@ -60,7 +61,7 @@ const Projects = () => {
 
   useEffect(() => {
     fetchApprovedJobs();
-    
+
     fetchAppliedJobs();
   }, []);
 
@@ -75,19 +76,26 @@ const Projects = () => {
   };
 
   // ✅ When Apply button clicked
-  const handleApplyClick = (job) => {
-    setSelectedJob(job);
-    setShowForm(true);
-  };
+ const handleApplyClick = (job) => {
+  if (
+    loggedInUser?.role === "artist" &&
+    loggedInUser?.status !== "approved"
+  ) {
+    alert("Your profile must be approved before applying for jobs.");
+    return;
+  }
+
+  setSelectedJob(job);
+  setShowForm(true);
+};
 
 
   const filteredJobs = jobs.filter(
-  (job) =>
-    job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.recruiterName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.jobDescription.toLowerCase().includes(searchTerm.toLowerCase())
-);
-
+    (job) =>
+      job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.recruiterName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.jobDescription.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // ✅ Submit Application
   const handleSubmit = (e) => {
@@ -107,8 +115,8 @@ const Projects = () => {
     formPayload.append("city", formData.city);
     formPayload.append("state", formData.state);
     formPayload.append("cv", formData.cv);
-    formPayload.append("jobId", selectedJob._id);      
-    formPayload.append("userId", loggedInUser._id);    
+    formPayload.append("jobId", selectedJob._id);
+    formPayload.append("userId", loggedInUser._id);
 
     fetch(`${backendURL}/api/applications/apply`, {
       method: "POST",
@@ -147,45 +155,57 @@ const Projects = () => {
         {/* ✅ Applied Jobs Button */}
         {/* ✅ Search Filter */}
 
-
-       
-
         <h1 className="projects-title">Available Jobs for Artists</h1>
 
-         <div className="applied-jobs-btn-container">
-          <button 
+        <div className="applied-jobs-btn-container">
+          <button
             className="applied-jobs-btn"
             onClick={() => navigate("/applied-jobs")} // 👈 navigate to AppliedJobs.js
           >
             Applied Jobs
           </button>
         </div>
-<div className="search-bar">
-  <input
-    type="text"
-    placeholder="Search jobs by title, recruiter, or description..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</div>
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search jobs by title, recruiter, or description..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
         <div className="projects-list">
-        {filteredJobs.length > 0 ? (
-  filteredJobs.map((job) => (
-
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map((job) => (
               <div className="project-card" key={job._id}>
                 <h3>{job.jobTitle}</h3>
-                <p><strong>Description:</strong> {job.jobDescription}</p>
-                <p><strong>Required Artist:</strong> {job.requiredArtist}</p>
-                <p><strong>Recruiter:</strong> {job.recruiterName}</p>
-                <p><strong>Contact:</strong> {job.contactEmail}, {job.contactPhone}</p>
-                <p><strong>Address:</strong> {job.address}</p>
+                <p>
+                  <strong>Description:</strong> {job.jobDescription}
+                </p>
+                <p>
+                  <strong>Required Artist:</strong> {job.requiredArtist}
+                </p>
+                <p>
+                  <strong>Recruiter:</strong> {job.recruiterName}
+                </p>
+                <p>
+                  <strong>Contact:</strong> {job.contactEmail},{" "}
+                  {job.contactPhone}
+                </p>
+                <p>
+                  <strong>Address:</strong> {job.address}
+                </p>
 
                 {appliedJobs.includes(job._id) ? (
                   <button className="applied-btn" disabled>
                     Applied
                   </button>
+                ) : loggedInUser?.role === "artist" &&
+                  loggedInUser?.status !== "approved" ? (
+                  <button className="apply-btn disabled" disabled>
+                    Approval Required
+                  </button>
                 ) : (
-                  <button 
+                  <button
                     className="apply-btn"
                     onClick={() => handleApplyClick(job)}
                   >
@@ -203,38 +223,96 @@ const Projects = () => {
         {showForm && (
           <div className="modal-overlay">
             <div className="modal-form">
-              <h2 className="form-heading">Apply for {selectedJob?.jobTitle}</h2>
+              <h2 className="form-heading">
+                Apply for {selectedJob?.jobTitle}
+              </h2>
               <p className="user-info-hint">
                 You are applying as <strong>{loggedInUser?.name}</strong>
               </p>
               <form onSubmit={handleSubmit} className="apply-form">
                 <label>Full Name</label>
-                <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>Email</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>Contact Number</label>
-                <input type="text" name="contact" value={formData.contact} onChange={handleChange} required />
+                <input
+                  type="text"
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>Qualifications</label>
-                <input type="text" name="qualifications" value={formData.qualifications} onChange={handleChange} required />
+                <input
+                  type="text"
+                  name="qualifications"
+                  value={formData.qualifications}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>Date of Birth</label>
-                <input type="date" name="dob" value={formData.dob} onChange={handleChange} required />
+                <input
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>City</label>
-                <input type="text" name="city" value={formData.city} onChange={handleChange} required />
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>State</label>
-                <input type="text" name="state" value={formData.state} onChange={handleChange} required />
+                <input
+                  type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  required
+                />
 
                 <label>Upload CV (PDF)</label>
-                <input type="file" name="cv" accept="application/pdf" onChange={handleChange} required />
+                <input
+                  type="file"
+                  name="cv"
+                  accept="application/pdf"
+                  onChange={handleChange}
+                  required
+                />
 
                 <div className="form-actions">
-                  <button type="submit" className="submit-btn">Submit Application</button>
-                  <button type="button" className="cancel-btn" onClick={() => setShowForm(false)}>Cancel</button>
+                  <button type="submit" className="submit-btn">
+                    Submit Application
+                  </button>
+                  <button
+                    type="button"
+                    className="cancel-btn"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>

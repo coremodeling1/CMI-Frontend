@@ -1649,3 +1649,29 @@ html, body, #root {
     font-size: 1rem;
   }
 }
+
+
+/* ✅ Fix date input visibility on mobile */
+input[type="date"] {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ccc;
+}
+
+/* Ensure placeholder & text are visible */
+input[type="date"]::-webkit-datetime-edit {
+  color: #000000;
+}
+
+/* Calendar icon visibility */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+}
+
+/* Mobile specific (extra safety) */
+@media (max-width: 768px) {
+  input[type="date"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}
