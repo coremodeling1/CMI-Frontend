@@ -160,7 +160,7 @@ const Signup = () => {
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
-                  <input type="date" name="dob" placeholder="DOB" onChange={handleChange} required />
+                  <input type="date" className="date-input" name="dob" onChange={handleChange} required />
                   <input type="text" name="city" placeholder="City" onChange={handleChange} required />
                   <input type="text" name="state" placeholder="State" onChange={handleChange} required />
                   <input type="text" name="country" placeholder="Country" onChange={handleChange} required />

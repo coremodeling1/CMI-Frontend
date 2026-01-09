@@ -1654,3 +1654,11 @@ html, body, #root {
     display: none !important;
   }
 }
+
+
+.date-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px; /* important for mobile */
+  color: white !important;
+}
