@@ -5,7 +5,8 @@ import Footer from "./Footer";
 import "../styles/Profile.css";
 import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
-const API_BASE = process.env.REACT_APP_API_BASE || "https://cmi-backend-6xf1.onrender.com";
+const API_BASE =
+  process.env.REACT_APP_API_BASE || "https://cmi-backend-6xf1.onrender.com";
 
 // Format date as dd-mm-yyyy
 const formatDate = (dateString) => {
@@ -19,7 +20,7 @@ const formatDate = (dateString) => {
 };
 
 const Profile = () => {
-    const navigate = useNavigate(); // ✅ initialize navigation
+  const navigate = useNavigate(); // ✅ initialize navigation
   // load user from localStorage (login stores the user with token)
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const token = storedUser?.token || null;
@@ -128,8 +129,8 @@ const Profile = () => {
         "state",
         "country",
         "language",
-          "instagram",             // ✅ add
-  "instagramFollowers",    // ✅ add
+        "instagram", // ✅ add
+        "instagramFollowers", // ✅ add
       ];
       textFields.forEach((f) => {
         if (updatedUser[f] !== undefined && updatedUser[f] !== null) {
@@ -167,7 +168,9 @@ const Profile = () => {
       }
     } catch (err) {
       console.error("Profile update failed:", err.response || err.message);
-      alert(err.response?.data?.message || "Failed to update profile. See console.");
+      alert(
+        err.response?.data?.message || "Failed to update profile. See console."
+      );
     } finally {
       setLoading(false);
     }
@@ -187,170 +190,212 @@ const Profile = () => {
     { label: "Country", key: "country" },
     { label: "Language", key: "language" },
     { label: "About", key: "description", textarea: true },
-      { label: "Instagram", key: "instagram" },
-  { label: "Instagram Followers", key: "instagramFollowers" },
+    { label: "Instagram", key: "instagram" },
+    { label: "Instagram Followers", key: "instagramFollowers" },
   ];
 
   // Recruiters: only show name, email, contact (role + identity are hidden)
- const fields =
-  user.role === "recruiter"
-    ? allFields.filter((f) => ["name", "email", "contact"].includes(f.key))
-    : user.role === "artist"
-    ? allFields // ✅ artists see everything, including Instagram
-    : allFields.filter(
-        (f) => !["instagram", "instagramFollowers"].includes(f.key) // ✅ hide IG fields
-      );
+  const fields =
+    user.role === "recruiter"
+      ? allFields.filter((f) => ["name", "email", "contact"].includes(f.key))
+      : user.role === "artist"
+      ? allFields // ✅ artists see everything, including Instagram
+      : allFields.filter(
+          (f) => !["instagram", "instagramFollowers"].includes(f.key) // ✅ hide IG fields
+        );
 
+  const getStatusLabel = (status) => {
+    if (status === "approved") return "Approved";
+    if (status === "rejected") return "Rejected";
+    return "Pending Approval";
+  };
 
   return (
     <>
       <Navbar />
-<div className="profile-body">
-      {user.role !== "recruiter" && (
-  <div className="top-right-btn">
-    <button onClick={() => navigate("/gallery")} className="gallery-btn">
-      Your Gallery
-    </button>
-  </div>
-)}
-
-      <div className="profile-container">
-        <h2 className="profile-title">Your Profile</h2>
-
-        {/* Profile picture */}
-        <div className="profile-pic-section">
-          <img
-            src={profilePicPreview || "/default-avatar.png"}
-            alt="Profile"
-            className="profile-avatar-circle"
-          />
-          {editing && (
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePicChange}
-              className="file-input"
-            />
-          )}
-        </div>
-
-        {/* Update buttons */}
-        <div className="profile-actions">
-          {editing ? (
-            <>
-              <button onClick={handleSave} className="save-btn" disabled={loading}>
-                {loading ? "Updating..." : "Save"}
-              </button>
-              <button onClick={handleCancel} className="cancel-btn" disabled={loading}>
-                Cancel
-              </button>
-            </>
-          ) : (
-            <button onClick={() => setEditing(true)} className="edit-btn">
-              Update Profile
-            </button>
-          )}
-        </div>
-
-        {/* Info card */}
-        <div className="profile-info-card">
-          <div className="profile-info-grid">
-            {fields.map(({ label, key, textarea }) => (
-              <div key={key} className="form-row">
-                <label>{label}:</label>
-                {editing ? (
-                  textarea ? (
-                    <textarea
-                      name={key}
-                      value={updatedUser[key] || ""}
-                      onChange={handleChange}
-                      rows="4"
-                      style={{
-                        resize: "vertical",
-                        overflowWrap: "break-word",
-                        whiteSpace: "pre-wrap",
-                      }}
-                      disabled={
-                        user.role === "recruiter" &&
-                        ["role", "identity"].includes(key)
-                      }
-                    />
-                  ) : key === "dob" ? (
-                    <input
-                      type="date"
-                      name={key}
-                      value={updatedUser.dob ? updatedUser.dob.split("T")[0] : ""}
-                      onChange={handleChange}
-                    />
-                  ) : (
-                    <input
-                      type="text"
-                      name={key}
-                      value={updatedUser[key] || ""}
-                      onChange={handleChange}
-                      disabled={
-                        user.role === "recruiter" &&
-                        ["role", "identity"].includes(key)
-                      }
-                    />
-                  )
-                ) : key === "dob" ? (
-                  <p>{formatDate(updatedUser.dob)}</p>
-                ) : (
-                  <p>{updatedUser[key] || "Not provided"}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Password card */}
-        <div className="password-card">
-          <div className="password-card-header">
+      <div className="profile-body">
+        {user.role !== "recruiter" && (
+          <div className="top-right-btn">
             <button
-              className="password-toggle-btn"
-              onClick={() => setShowPasswordForm((s) => !s)}
+              onClick={() => navigate("/gallery")}
+              className="gallery-btn"
             >
-              {showPasswordForm ? "Close" : "Change Password"}
+              Your Gallery
             </button>
           </div>
+        )}
 
-          {showPasswordForm && (
-            <div className="password-form">
-              <div className="form-row">
-                <label>Old Password:</label>
-                <input
-                  type="password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                />
-              </div>
-              <div className="form-row">
-                <label>New Password:</label>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-              </div>
-              <div className="password-actions">
+        <div className="profile-container">
+          <h2 className="profile-title">Your Profile</h2>
+
+          {/* ✅ PROFILE STATUS */}
+          <div className="profile-status">
+            <span
+              className={`status-badge ${
+                user.status === "approved"
+                  ? "approved"
+                  : user.status === "rejected"
+                  ? "rejected"
+                  : "pending"
+              }`}
+            >
+              {getStatusLabel(user.status)}
+            </span>
+
+            {user.status === "pending" && (
+              <p className="status-note">
+                ⏳ Your profile is under review. You’ll be notified once it’s
+                approved.
+              </p>
+            )}
+
+            {user.status === "rejected" && (
+              <p className="status-note error">
+                ❌ Your profile was rejected. Please update your details and
+                contact support.
+              </p>
+            )}
+          </div>
+
+          {/* Profile picture */}
+          <div className="profile-pic-section">
+            <img
+              src={profilePicPreview || "/default-avatar.png"}
+              alt="Profile"
+              className="profile-avatar-circle"
+            />
+            {editing && (
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePicChange}
+                className="file-input"
+              />
+            )}
+          </div>
+
+          {/* Update buttons */}
+          <div className="profile-actions">
+            {editing ? (
+              <>
                 <button
-                  onClick={handleChangePassword}
+                  onClick={handleSave}
                   className="save-btn"
-                  disabled={pwdLoading}
+                  disabled={loading}
                 >
-                  {pwdLoading ? "Updating..." : "Update Password"}
+                  {loading ? "Updating..." : "Save"}
                 </button>
+                <button
+                  onClick={handleCancel}
+                  className="cancel-btn"
+                  disabled={loading}
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <button onClick={() => setEditing(true)} className="edit-btn">
+                Update Profile
+              </button>
+            )}
+          </div>
 
+          {/* Info card */}
+          <div className="profile-info-card">
+            <div className="profile-info-grid">
+              {fields.map(({ label, key, textarea }) => (
+                <div key={key} className="form-row">
+                  <label>{label}:</label>
+                  {editing ? (
+                    textarea ? (
+                      <textarea
+                        name={key}
+                        value={updatedUser[key] || ""}
+                        onChange={handleChange}
+                        rows="4"
+                        style={{
+                          resize: "vertical",
+                          overflowWrap: "break-word",
+                          whiteSpace: "pre-wrap",
+                        }}
+                        disabled={
+                          user.role === "recruiter" &&
+                          ["role", "identity"].includes(key)
+                        }
+                      />
+                    ) : key === "dob" ? (
+                      <input
+                        type="date"
+                        name={key}
+                        value={
+                          updatedUser.dob ? updatedUser.dob.split("T")[0] : ""
+                        }
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        name={key}
+                        value={updatedUser[key] || ""}
+                        onChange={handleChange}
+                        disabled={
+                          user.role === "recruiter" &&
+                          ["role", "identity"].includes(key)
+                        }
+                      />
+                    )
+                  ) : key === "dob" ? (
+                    <p>{formatDate(updatedUser.dob)}</p>
+                  ) : (
+                    <p>{updatedUser[key] || "Not provided"}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
 
-              </div>
-                   
+          {/* Password card */}
+          <div className="password-card">
+            <div className="password-card-header">
+              <button
+                className="password-toggle-btn"
+                onClick={() => setShowPasswordForm((s) => !s)}
+              >
+                {showPasswordForm ? "Close" : "Change Password"}
+              </button>
             </div>
 
-            
-          )}
+            {showPasswordForm && (
+              <div className="password-form">
+                <div className="form-row">
+                  <label>Old Password:</label>
+                  <input
+                    type="password"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                  />
+                </div>
+                <div className="form-row">
+                  <label>New Password:</label>
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                </div>
+                <div className="password-actions">
+                  <button
+                    onClick={handleChangePassword}
+                    className="save-btn"
+                    disabled={pwdLoading}
+                  >
+                    {pwdLoading ? "Updating..." : "Update Password"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </div>
       <Footer />
     </>

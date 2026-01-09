@@ -333,3 +333,42 @@ gap: 15px 0px;
   text-overflow: ellipsis;
   white-space: nowrap; /* ✅ one line with "..." */
 }
+
+
+.profile-status {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.status-badge.approved {
+  background: #e6f9ee;
+  color: #1e7f4b;
+}
+
+.status-badge.rejected {
+  background: #fdeaea;
+  color: #b02a37;
+}
+
+.status-badge.pending {
+  background: #fff4e5;
+  color: #b26a00;
+}
+
+.status-note {
+  font-size: 13px;
+  color: #555;
+}
+
+.status-note.error {
+  color: #b02a37;
+}
