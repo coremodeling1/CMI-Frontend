@@ -50,39 +50,37 @@ const Profile = () => {
     setProfilePicPreview(user.profilePic || null);
   }, [user]);
 
-useEffect(() => {
-  const fetchProfile = async () => {
-    if (!token) return;
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!token) return;
 
-    try {
-      const res = await axios.get(`${API_BASE}/api/auth/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      try {
+        const res = await axios.get(`${API_BASE}/api/auth/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (res.data) {
-        const updated = {
-          ...res.data,
-          token, // keep token
-        };
+        if (res.data) {
+          const updated = {
+            ...res.data,
+            token, // keep token
+          };
 
-        // ✅ update everything
-        setUser(updated);
-        setUpdatedUser(updated);
-        setProfilePicPreview(updated.profilePic || null);
+          setUser(updated);
+          setUpdatedUser(updated);
+          setProfilePicPreview(updated.profilePic || null);
 
-        // ✅ sync localStorage
-        localStorage.setItem("user", JSON.stringify(updated));
+          // ✅ sync latest status into localStorage
+          localStorage.setItem("user", JSON.stringify(updated));
+        }
+      } catch (err) {
+        console.error("Failed to fetch latest profile:", err);
       }
-    } catch (err) {
-      console.error("Failed to fetch latest profile:", err);
-    }
-  };
+    };
 
-  fetchProfile();
-}, [token]);
-
+    fetchProfile();
+  }, [token]);
 
   const handleChangePassword = async () => {
     if (!token) {
@@ -262,34 +260,35 @@ useEffect(() => {
         <div className="profile-container">
           <h2 className="profile-title">Your Profile</h2>
 
-          {/* ✅ PROFILE STATUS */}
-          <div className="profile-status">
-            <span
-              className={`status-badge ${
-                user.status === "approved"
-                  ? "approved"
+          {user.role === "artist" && (
+            <div className="profile-status">
+              <span
+                className={`status-badge ${
+                  user.status === "approved"
+                    ? "approved"
+                    : user.status === "rejected"
+                    ? "rejected"
+                    : "pending"
+                }`}
+              >
+                {user.status === "approved"
+                  ? "Approved"
                   : user.status === "rejected"
-                  ? "rejected"
-                  : "pending"
-              }`}
-            >
-              {getStatusLabel(user.status)}
-            </span>
+                  ? "Rejected"
+                  : "Pending Approval"}
+              </span>
 
-            {user.status === "pending" && (
-              <p className="status-note">
-                ⏳ Your profile is under review. You’ll be notified once it’s
-                approved.
-              </p>
-            )}
+              {user.status === "pending" && (
+                <p className="status-note">⏳ Your profile is under review.</p>
+              )}
 
-            {user.status === "rejected" && (
-              <p className="status-note error">
-                ❌ Your profile was rejected. Please update your details and
-                contact support.
-              </p>
-            )}
-          </div>
+              {user.status === "rejected" && (
+                <p className="status-note error">
+                  ❌ Your profile was rejected. Please update your details.
+                </p>
+              )}
+            </div>
+          )}
 
           {/* Profile picture */}
           <div className="profile-pic-section">
