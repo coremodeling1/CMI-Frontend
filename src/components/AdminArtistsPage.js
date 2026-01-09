@@ -10,9 +10,27 @@ const AdminArtistsPage = () => {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [previewMedia, setPreviewMedia] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
-  const [stateFilter, setStateFilter] = useState("all");
+  const [roleFilter, setRoleFilter] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  // ✅ Role categories
+  const roles = [
+    "model",
+    "actor",
+    "influencer",
+    "writer",
+    "stylist",
+    "photographer",
+    "advertising professional",
+    "singer",
+    "musician",
+    "dancer",
+    "anchor",
+    "voice-over artist",
+    "filmmaker",
+    "standup-comedian",
+  ];
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -32,11 +50,7 @@ const AdminArtistsPage = () => {
     fetchArtists();
   }, [user]);
 
-  const uniqueStates = [
-    "all",
-    ...new Set(artists.map((a) => a.state).filter(Boolean)),
-  ];
-
+  // ✅ Apply filters
   const filteredArtists = artists.filter((artist) => {
     // Status filter
     const statusMatch =
@@ -46,11 +60,14 @@ const AdminArtistsPage = () => {
         ? !artist.status || artist.status === "pending"
         : artist.status === statusFilter;
 
-    // State filter
-    const stateMatch =
-      stateFilter === "all" ? true : artist.state === stateFilter;
+    // Role filter
+    const roleMatch = roleFilter
+      ? (artist.identity || artist.role || "")
+          .toLowerCase()
+          .includes(roleFilter.toLowerCase())
+      : true;
 
-    return statusMatch && stateMatch;
+    return statusMatch && roleMatch;
   });
 
   const handleStatusUpdate = async (artistId, status) => {
@@ -136,33 +153,35 @@ const AdminArtistsPage = () => {
       <Navbar />
       <div className="artists-page">
         <h1 className="page-title">Admin - Manage Artists</h1>
+       {/* ✅ FILTERS */}
         <div className="filters">
-          {/* Status Filter */}
+          {/* Status */}
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
-            <option value="all">All Artists</option>
+            <option value="all">All Status</option>
             <option value="approved">Approved</option>
             <option value="rejected">Rejected</option>
             <option value="pending">Pending</option>
           </select>
 
-          {/* State Filter */}
+          {/* Role */}
           <select
-            value={stateFilter}
-            onChange={(e) => setStateFilter(e.target.value)}
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
           >
-            {uniqueStates.map((state) => (
-              <option key={state} value={state}>
-                {state === "all" ? "All States" : state}
+            <option value="">All Categories</option>
+            {roles.map((role, index) => (
+              <option key={index} value={role}>
+                {role.charAt(0).toUpperCase() + role.slice(1)}
               </option>
             ))}
           </select>
         </div>
 
         <div className="artists-grid">
-          {artists.length > 0 ? (
+          {filteredArtists.length > 0 ? (
             filteredArtists.map((artist) => {
               const firstMedia = getFirstMedia(artist);
               return (
