@@ -519,12 +519,9 @@ footer {
 }
 }
 
-/* @media (max-width: 768px) {
-  .profile-text {
-    display: none;
+/* ✅ Hide desktop navbar items on mobile */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
   }
-
-  .profile-avatar {
-    display: none;
-  }
-} */
+}

@@ -18,8 +18,8 @@ const Signup = () => {
     state: "",
     country: "",
     language: "",
-    instagram: "", // ✅ added here
-    instagramFollowers: "", // ✅ new field
+    instagram: "",   // ✅ added here
+    instagramFollowers: "",  // ✅ new field
   });
   const [profilePic, setProfilePic] = useState(null);
   const [files, setFiles] = useState([]);
@@ -61,13 +61,9 @@ const Signup = () => {
         data.append("files", file);
       });
 
-      await axios.post(
-        "https://cmi-backend-6xf1.onrender.com/api/auth/signup",
-        data,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post("https://cmi-backend-6xf1.onrender.com/api/auth/signup", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setSuccessMessage("Successfully registered!");
       setFormData({
@@ -82,8 +78,8 @@ const Signup = () => {
         state: "",
         country: "",
         language: "",
-        instagram: "", // ✅ reset instagram
-        instagramFollowers: "", // ✅ reset followers count
+        instagram: "",   // ✅ reset instagram
+         instagramFollowers: "",  // ✅ reset followers count
       });
       setFiles([]);
       setProfilePic(null);
@@ -98,22 +94,12 @@ const Signup = () => {
   };
 
   const photoIdentities = [
-    "model",
-    "actor",
-    "influencer",
-    "writer",
-    "stylist",
-    "photographer",
-    "advertising professional",
+    "model","actor","influencer","writer","stylist",
+    "photographer","advertising professional",
   ];
   const videoIdentities = [
-    "singer",
-    "musician",
-    "dancer",
-    "anchor",
-    "voice-over artist",
-    "filmmaker",
-    "standup-comedian",
+    "singer","musician","dancer","anchor",
+    "voice-over artist","filmmaker","standup-comedian",
   ];
 
   const showPhotoFields = photoIdentities.includes(identity);
@@ -130,7 +116,10 @@ const Signup = () => {
           <h2>Signup - CoreModeling</h2>
           <div className="form-scroll">
             <form onSubmit={handleSubmit}>
-              <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
                 <option value="artist">Artist</option>
                 <option value="recruiter">Recruiter</option>
               </select>
@@ -150,9 +139,7 @@ const Signup = () => {
                   <option value="writer">Writer</option>
                   <option value="anchor">Anchor</option>
                   <option value="stylist">Stylist</option>
-                  <option value="advertising professional">
-                    Advertising Professional
-                  </option>
+                  <option value="advertising professional">Advertising Professional</option>
                   <option value="voice-over artist">Voice-over Artist</option>
                   <option value="photographer">Photographer</option>
                   <option value="filmmaker">Filmmaker</option>
@@ -160,87 +147,24 @@ const Signup = () => {
                 </select>
               )}
 
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                required
-              />
+              <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
+              <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+              <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
 
               {role === "artist" && (
                 <>
-                  <input
-                    type="text"
-                    name="contact"
-                    placeholder="Contact Number"
-                    onChange={handleChange}
-                    required
-                  />
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    required
-                  >
+                  <input type="text" name="contact" placeholder="Contact Number" onChange={handleChange} required />
+                  <select name="gender" value={formData.gender} onChange={handleChange} required>
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
-                  <div className="date-field">
-                    <input
-                      type="date"
-                      name="dob"
-                      value={formData.dob}
-                      onChange={handleChange}
-                      required
-                    />
-                    <label>Date of Birth</label>
-                  </div>
-
-                  <input
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="state"
-                    placeholder="State"
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="country"
-                    placeholder="Country"
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="language"
-                    placeholder="Language"
-                    onChange={handleChange}
-                    required
-                  />
+                  <input type="date" name="dob" placeholder="DOB" onChange={handleChange} required />
+                  <input type="text" name="city" placeholder="City" onChange={handleChange} required />
+                  <input type="text" name="state" placeholder="State" onChange={handleChange} required />
+                  <input type="text" name="country" placeholder="Country" onChange={handleChange} required />
+                  <input type="text" name="language" placeholder="Language" onChange={handleChange} required />
 
                   {/* ✅ Instagram field */}
                   <input
@@ -251,54 +175,32 @@ const Signup = () => {
                     onChange={handleChange}
                   />
                   {/* ✅ Instagram Followers Count field */}
-                  <input
-                    type="text"
-                    name="instagramFollowers"
-                    placeholder="Enter your Instagram Followers Count"
-                    value={formData.instagramFollowers}
-                    onChange={handleChange}
-                  />
+<input
+  type="text"
+  name="instagramFollowers"
+  placeholder="Enter your Instagram Followers Count"
+  value={formData.instagramFollowers}
+  onChange={handleChange}
+/>
                 </>
               )}
 
               <label>Upload Profile Picture</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleProfilePicChange}
-              />
+              <input type="file" accept="image/*" onChange={handleProfilePicChange} />
 
               {showPhotoFields && (
                 <>
                   <label>Upload photo</label>
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
-                  <textarea
-                    name="description"
-                    placeholder="Add a short description"
-                    onChange={handleChange}
-                  />
+                  <input type="file" multiple accept="image/*" onChange={handleFileChange} />
+                  <textarea name="description" placeholder="Add a short description" onChange={handleChange} />
                 </>
               )}
 
               {showVideoFields && (
                 <>
                   <label>Upload video</label>
-                  <input
-                    type="file"
-                    multiple
-                    accept="video/*"
-                    onChange={handleFileChange}
-                  />
-                  <textarea
-                    name="description"
-                    placeholder="Add a short description"
-                    onChange={handleChange}
-                  />
+                  <input type="file" multiple accept="video/*" onChange={handleFileChange} />
+                  <textarea name="description" placeholder="Add a short description" onChange={handleChange} />
                 </>
               )}
 
