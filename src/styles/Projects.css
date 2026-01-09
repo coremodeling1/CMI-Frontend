@@ -314,3 +314,12 @@
   color: #aaa;
 }
 
+.status-note {
+  color: #ffffff; /* ✅ white text */
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.status-note.error {
+  color: #ffffff; /* ✅ override red */
+}
