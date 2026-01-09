@@ -315,11 +315,11 @@
 }
 
 .status-note {
-  color: #ffffff; /* ✅ white text */
+  color: #ffffff !important; /* ✅ white text */
   font-size: 14px;
   margin-top: 6px;
 }
 
 .status-note.error {
-  color: #ffffff; /* ✅ override red */
+  color: #ffffff !important; /* ✅ override red */
 }
