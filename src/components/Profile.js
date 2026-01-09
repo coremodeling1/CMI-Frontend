@@ -50,6 +50,40 @@ const Profile = () => {
     setProfilePicPreview(user.profilePic || null);
   }, [user]);
 
+useEffect(() => {
+  const fetchProfile = async () => {
+    if (!token) return;
+
+    try {
+      const res = await axios.get(`${API_BASE}/api/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.data) {
+        const updated = {
+          ...res.data,
+          token, // keep token
+        };
+
+        // ✅ update everything
+        setUser(updated);
+        setUpdatedUser(updated);
+        setProfilePicPreview(updated.profilePic || null);
+
+        // ✅ sync localStorage
+        localStorage.setItem("user", JSON.stringify(updated));
+      }
+    } catch (err) {
+      console.error("Failed to fetch latest profile:", err);
+    }
+  };
+
+  fetchProfile();
+}, [token]);
+
+
   const handleChangePassword = async () => {
     if (!token) {
       alert("You must be logged in to update password.");
