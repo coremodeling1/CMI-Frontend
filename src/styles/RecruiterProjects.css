@@ -254,3 +254,16 @@
   background-color: #e03e00;
 }
 
+.floating-create-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.premium-warning {
+  color: #ff4d4d;
+  text-align: center;
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+}

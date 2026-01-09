@@ -7,7 +7,7 @@ import "../styles/RecruiterProjects.css";
 const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const RecruiterProjects = () => {
-   const navigate = useNavigate(); // 👈 hook for navigation
+  const navigate = useNavigate(); // 👈 hook for navigation
 
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -67,48 +67,48 @@ const RecruiterProjects = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const res = await fetch(`${backendURL}/api/jobs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user?.token}`,
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const res = await fetch(`${backendURL}/api/jobs`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Failed to post job");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to post job");
+      }
+
+      const newJob = await res.json();
+
+      // 👇 Add postedBy immediately so the delete button appears
+      const jobWithUser = {
+        ...newJob,
+        postedBy: { _id: user._id, name: user.name || "You" },
+      };
+
+      setJobs([jobWithUser, ...jobs]);
+      setShowForm(false);
+      setMessage("Job posted successfully!");
+      setFormData({
+        jobTitle: "",
+        jobDescription: "",
+        requiredArtist: "",
+        recruiterName: "",
+        contactEmail: "",
+        contactPhone: "",
+        address: "",
+      });
+    } catch (err) {
+      console.error("Error posting job:", err);
+      setMessage("Error posting job");
     }
-
-    const newJob = await res.json();
-
-    // 👇 Add postedBy immediately so the delete button appears
-    const jobWithUser = {
-      ...newJob,
-      postedBy: { _id: user._id, name: user.name || "You" },
-    };
-
-    setJobs([jobWithUser, ...jobs]);
-    setShowForm(false);
-    setMessage("Job posted successfully!");
-    setFormData({
-      jobTitle: "",
-      jobDescription: "",
-      requiredArtist: "",
-      recruiterName: "",
-      contactEmail: "",
-      contactPhone: "",
-      address: "",
-    });
-  } catch (err) {
-    console.error("Error posting job:", err);
-    setMessage("Error posting job");
-  }
-};
+  };
 
   // --- New: Handle delete job ---
   const handleDelete = async (jobId) => {
@@ -131,27 +131,34 @@ const RecruiterProjects = () => {
     }
   };
 
-    const filteredJobs = jobs.filter(
-  (job) =>
-    job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.recruiterName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.jobDescription.toLowerCase().includes(searchTerm.toLowerCase())
-);
+  const filteredJobs = jobs.filter(
+    (job) =>
+      job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.recruiterName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.jobDescription.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="recruiter-projects-page">
       <Navbar />
-<div className="search-bar">
-  <input
-    type="text"
-    placeholder="Search jobs by title, recruiter, or description..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</div>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search jobs by title, recruiter, or description..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {user?.role === "recruiter" && user?.premiumStatus !== "granted" && (
+        <p className="premium-warning">
+          🚫 Posting jobs is a premium feature. Please upgrade to continue.
+        </p>
+      )}
+
       <div className="jobs-list">
         {filteredJobs.length > 0 ? (
-  filteredJobs.map((job) => (
+          filteredJobs.map((job) => (
             <div className="job-card" key={job._id}>
               <h3>{job.jobTitle}</h3>
               <p>
@@ -188,8 +195,16 @@ const RecruiterProjects = () => {
 
       {/* Floating Create Job Button */}
       <button
-        className="floating-create-btn"
-        onClick={() => setShowForm(true)}
+        className={`floating-create-btn ${
+          user?.premiumStatus !== "granted" ? "disabled" : ""
+        }`}
+        onClick={() => {
+          if (user?.premiumStatus !== "granted") {
+            alert("Please buy premium to post jobs.");
+            return;
+          }
+          setShowForm(true);
+        }}
       >
         + Create Job
       </button>
@@ -201,9 +216,8 @@ const RecruiterProjects = () => {
         Your Jobs
       </button>
 
-
       {/* Floating Form Modal */}
-      {showForm && (
+      {showForm && user?.premiumStatus === "granted" && (
         <div className="form-modal-overlay">
           <div className="form-modal-card">
             <button className="close-btn" onClick={() => setShowForm(false)}>
