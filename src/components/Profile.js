@@ -246,16 +246,17 @@ const Profile = () => {
     <>
       <Navbar />
       <div className="profile-body">
-        {user.role !== "recruiter" && (
-          <div className="top-right-btn">
-            <button
-              onClick={() => navigate("/gallery")}
-              className="gallery-btn"
-            >
-              Your Gallery
-            </button>
-          </div>
-        )}
+        {/* ✅ Gallery button ONLY for approved artists */}
+      {user.role === "artist" && user.status === "approved" && (
+        <div className="top-right-btn">
+          <button
+            onClick={() => navigate("/gallery")}
+            className="gallery-btn"
+          >
+            Your Gallery
+          </button>
+        </div>
+      )}
 
         <div className="profile-container">
           <h2 className="profile-title">Your Profile</h2>
@@ -287,6 +288,14 @@ const Profile = () => {
                   ❌ Your profile was rejected. Please update your details.
                 </p>
               )}
+
+              {/* 🚫 Gallery locked message */}
+            {user.status !== "approved" && (
+              <p className="status-note error">
+                🚫 Gallery access is locked until your profile is approved.
+              </p>
+            )}
+            
             </div>
           )}
 
