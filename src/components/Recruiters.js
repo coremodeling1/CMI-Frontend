@@ -5,6 +5,7 @@ import "../styles/Recruiters.css";
 
 const Recruiters = () => {
   const [recruiters, setRecruiters] = useState([]);
+  const [premiumFilter, setPremiumFilter] = useState("all"); // ✅ filter state
 
   useEffect(() => {
     const fetchRecruiters = async () => {
@@ -59,6 +60,14 @@ const Recruiters = () => {
   }
 };
 
+ // ✅ Apply premium filter
+  const filteredRecruiters = recruiters.filter((rec) => {
+    if (premiumFilter === "all") return true;
+    if (premiumFilter === "granted") return rec.premiumStatus === "granted";
+    if (premiumFilter === "not-granted")
+      return rec.premiumStatus !== "granted";
+    return true;
+  });
 
   return (
     <div className="recruiters-page">
@@ -67,9 +76,21 @@ const Recruiters = () => {
       <main className="recruiters-content">
         <h1>Recruiters</h1>
 
+        {/* ✅ FILTER */}
+        <div className="filters">
+          <select
+            value={premiumFilter}
+            onChange={(e) => setPremiumFilter(e.target.value)}
+          >
+            <option value="all">All Recruiters</option>
+            <option value="granted">Premium Granted</option>
+            <option value="not-granted">Not Premium</option>
+          </select>
+        </div>
+
         <div className="recruiters-grid">
-          {recruiters.length > 0 ? (
-            recruiters.map((rec) => (
+          {filteredRecruiters.length > 0 ? (
+            filteredRecruiters.map((rec) => (
               <div className="recruiter-card" key={rec._id}>
                 <img
                   src={rec.profilePic || "https://via.placeholder.com/150"}
