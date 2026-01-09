@@ -127,18 +127,10 @@ const HomePage = () => {
             <p className="intro">Welcome to CoreModeling</p>
             <h2 className="title">Connecting Artists & Recruiters</h2>
             <p className="description">
-              CoreModeling is a dedicated platform built to bridge the gap between 
-              talented artists and recruiters. Whether you’re an artist seeking 
-              exciting projects or a recruiter searching for the right talent, 
-              CoreModeling provides a space where creativity meets opportunity.
+              CoreModeling is a dedicated platform that connects talented artists with recruiters, creating a space where creativity meets opportunity. Artists can showcase their work, apply for projects, and grow their careers with global visibility.
             </p>
             <p className="description">
-              Artists can showcase their talent, apply for projects, and grow 
-              their careers with global visibility. Recruiters gain access to a pool 
-              of skilled professionals, making it easier to discover and hire the 
-              right talent for their needs. With a user-friendly experience, we’re 
-              here to simplify collaboration and foster meaningful connections in 
-              the creative industry.
+              Recruiters gain access to a diverse pool of skilled professionals, making it easier to discover and hire the right talent. With a user friendly experience, CoreModeling simplifies collaboration and builds meaningful connections in the creative industry.
             </p>
           
           </div>
@@ -166,11 +158,7 @@ const HomePage = () => {
  <section className="steps-section">
       <h2 className="steps-heading">How Our Platform Works</h2>
   <p className="steps-subtext">
-    Our platform is designed to bridge the gap between <strong>artists and recruiters</strong> in the creative industry. 
-    Artists can build stunning profiles, upload photos, videos, and portfolios to highlight their talent. 
-    At the same time, recruiters gain access to a wide pool of verified professionals, making it easy to 
-    <strong> post projects, review applications, and hire the right talent</strong>. 
-    From showcasing creativity to securing opportunities, CoreModeling streamlines every step of the journey.
+    CoreModeling connects artists and recruiters in the creative industry by allowing artists to showcase their talent through profiles, photos, videos, and portfolios, while recruiters access verified professionals to post projects, review applications, and hire the right talent with ease.
   </p>
       <div className="steps-container">
         {/* Left side - Steps buttons */}
@@ -251,7 +239,7 @@ const HomePage = () => {
     </p>
 
     <div className="faq-container">
-      
+
       {/* ARTIST FAQ */}
       <div className="faq-column">
         <h3 className="faq-title">For Artists</h3>
@@ -261,39 +249,39 @@ const HomePage = () => {
           <p>
             Freshers can start by creating a complete profile, selecting the right category,
             and uploading photos, videos, or portfolios. Even without experience, showcasing
-            talent and consistency helps attract recruiters.
+            your talent helps attract recruiters.
+          </p>
+        </details>
+
+        <details>
+          <summary>When will my profile be visible to recruiters?</summary>
+          <p>
+            Your profile will be visible only after it is reviewed and approved by the
+            CoreModeling team. Pending or rejected profiles are not shown to recruiters.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I apply for projects if my profile is pending or rejected?</summary>
+          <p>
+            No. Artists can apply for projects only after their profile is approved.
+            Pending or rejected profiles cannot apply to any projects.
           </p>
         </details>
 
         <details>
           <summary>How will I get work?</summary>
           <p>
-            Recruiters post projects regularly. Artists can browse projects and apply directly.
-            A strong profile increases visibility and selection chances.
+            Recruiters post projects regularly. Approved artists can browse projects
+            and apply directly. A strong profile improves your chances of selection.
           </p>
         </details>
 
         <details>
-          <summary>How can I build a stable career?</summary>
-          <p>
-            Stay active, update your portfolio frequently, apply consistently,
-            and maintain professionalism. Growth happens with patience and quality work.
-          </p>
-        </details>
-
-        <details>
-          <summary>What kind of projects do you usually get?</summary>
+          <summary>What kind of projects are available?</summary>
           <p>
             Projects include modeling shoots, ad campaigns, fashion shows, short films,
             music videos, brand promotions, and social media collaborations.
-          </p>
-        </details>
-
-        <details>
-          <summary>How do you match artists to roles?</summary>
-          <p>
-            Matching is done based on category, skills, portfolio quality,
-            experience, and project requirements.
           </p>
         </details>
 
@@ -305,10 +293,10 @@ const HomePage = () => {
         </details>
 
         <details>
-          <summary>Do you promise guaranteed work or roles?</summary>
+          <summary>Do you guarantee work or roles?</summary>
           <p>
-            No platform can guarantee work. CoreModeling provides opportunities,
-            visibility, and connections — final selection depends on recruiters.
+            CoreModeling provides opportunities and visibility, but final selection
+            depends entirely on recruiters and project requirements.
           </p>
         </details>
       </div>
@@ -320,23 +308,23 @@ const HomePage = () => {
         <details>
           <summary>Is posting a project free?</summary>
           <p>
-            Yes. Recruiters can post projects completely free of cost on CoreModeling.
+            No. Recruiters must have a Premium membership to post projects on CoreModeling.
           </p>
         </details>
 
         <details>
           <summary>Can I view artist profiles for free?</summary>
           <p>
-            You can browse categories and listings for free. Viewing full artist profiles,
-            portfolios, photos, and videos requires a Premium plan.
+            You can browse categories and basic listings for free. Viewing full artist
+            profiles, portfolios, photos, and videos requires a Premium plan.
           </p>
         </details>
 
         <details>
           <summary>What do I get with the Premium plan?</summary>
           <p>
-            Premium access allows you to view complete artist profiles, portfolios,
-            media galleries, and directly contact shortlisted artists.
+            Premium access allows you to post projects, view complete artist profiles,
+            portfolios, media galleries, and contact artists directly.
           </p>
         </details>
 
@@ -349,14 +337,6 @@ const HomePage = () => {
         </details>
 
         <details>
-          <summary>How does the application process work?</summary>
-          <p>
-            Artists apply to your projects. With Premium access, you can review
-            applications and connect directly with selected candidates.
-          </p>
-        </details>
-
-        <details>
           <summary>Is Premium required to hire artists?</summary>
           <p>
             Yes. Premium is required to view detailed profiles and communicate
@@ -365,10 +345,19 @@ const HomePage = () => {
         </details>
 
         <details>
-          <summary>Do you guarantee successful hiring?</summary>
+          <summary>How can I get the Premium membership?</summary>
           <p>
-            CoreModeling simplifies hiring but does not guarantee selection.
-            Final hiring decisions depend on project needs and mutual agreement.
+            To become a Premium member, please contact us directly using the details below.
+          </p>
+        </details>
+
+        <details>
+          <summary>How can I contact CoreModeling?</summary>
+          <p>
+            Email: coremodeling1@gmail.com <br />
+            Phone: +91 090045 00657 <br />
+            Address: 1st Floor Office No-02 Seasons Harmony Nr Ayush Nx,
+            Kalyan West, Maharashtra 421301
           </p>
         </details>
       </div>
@@ -376,6 +365,7 @@ const HomePage = () => {
     </div>
   </div>
 </section>
+
 
 
 
