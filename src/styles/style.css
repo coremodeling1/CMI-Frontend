@@ -1023,6 +1023,7 @@ html, body, #root {
   z-index: -1; /* keeps it behind the hero content */
 }
 
+
 .hero-section {
   position: relative;
   text-align: center;
@@ -1343,10 +1344,6 @@ html, body, #root {
   font-weight: 800;
 }
 
-
-
-
-
 .categories-section {
   padding: 60px 20px;
   background: #ffffff;
@@ -1647,44 +1644,6 @@ html, body, #root {
 
   .faq-subtext {
     font-size: 1rem;
-  }
-}
-
-
-
-
-/* ============================= */
-/* Fix date input visibility on mobile */
-/* ============================= */
-
-input[type="date"] {
-  color-scheme: dark; /* helps mobile browsers */
-}
-
-/* Mobile specific fix */
-@media (max-width: 768px) {
-  input[type="date"] {
-    color: #ffffff !important;          /* DD-MM-YYYY text */
-    background-color: transparent !important;
-    border: 1px solid #ffffff;
-  }
-
-  /* Make the date text itself white */
-  input[type="date"]::-webkit-datetime-edit {
-    color: #ffffff;
-  }
-
-  input[type="date"]::-webkit-datetime-edit-text,
-  input[type="date"]::-webkit-datetime-edit-month-field,
-  input[type="date"]::-webkit-datetime-edit-day-field,
-  input[type="date"]::-webkit-datetime-edit-year-field {
-    color: #ffffff;
-  }
-
-  /* Calendar icon white */
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    opacity: 1;
   }
 }
 
