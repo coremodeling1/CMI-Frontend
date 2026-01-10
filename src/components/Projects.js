@@ -65,6 +65,33 @@ const Projects = () => {
     fetchAppliedJobs();
   }, []);
 
+  useEffect(() => {
+    const syncUser = async () => {
+      if (!loggedInUser?.token) return;
+
+      try {
+        const res = await fetch(
+          "https://cmi-backend-6xf1.onrender.com/api/auth/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${loggedInUser.token}`,
+            },
+          }
+        );
+
+        if (res.ok) {
+          const data = await res.json();
+          const updated = { ...data, token: loggedInUser.token };
+          localStorage.setItem("user", JSON.stringify(updated));
+        }
+      } catch (err) {
+        console.error("Failed to sync user:", err);
+      }
+    };
+
+    syncUser();
+  }, []);
+
   // ✅ Handle input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -76,19 +103,18 @@ const Projects = () => {
   };
 
   // ✅ When Apply button clicked
- const handleApplyClick = (job) => {
-  if (
-    loggedInUser?.role === "artist" &&
-    loggedInUser?.status !== "approved"
-  ) {
-    alert("Your profile must be approved before applying for jobs.");
-    return;
-  }
+  const handleApplyClick = (job) => {
+    if (
+      loggedInUser?.role === "artist" &&
+      loggedInUser?.status !== "approved"
+    ) {
+      alert("Your profile must be approved before applying for jobs.");
+      return;
+    }
 
-  setSelectedJob(job);
-  setShowForm(true);
-};
-
+    setSelectedJob(job);
+    setShowForm(true);
+  };
 
   const filteredJobs = jobs.filter(
     (job) =>
