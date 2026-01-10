@@ -47,17 +47,24 @@ const Projects = () => {
 
   // ✅ Fetch applied jobs for logged-in user
   const fetchAppliedJobs = async () => {
-    if (!loggedInUser) return;
-    try {
-      const res = await fetch(
-        `${backendURL}/api/applications/user/${loggedInUser._id}`
-      );
-      const data = await res.json();
-      setAppliedJobs(data.map((app) => app.job._id)); // store only jobIds
-    } catch (err) {
-      console.error("Error fetching applied jobs:", err);
-    }
-  };
+  if (!loggedInUser) return;
+  try {
+    const res = await fetch(
+      `${backendURL}/api/applications/user/${loggedInUser._id}`
+    );
+    const data = await res.json();
+
+    // Filter out broken entries where job is null
+    const validJobIds = data
+      .filter((app) => app.job && app.job._id)
+      .map((app) => app.job._id);
+
+    setAppliedJobs(validJobIds);
+  } catch (err) {
+    console.error("Error fetching applied jobs:", err);
+  }
+};
+
 
   useEffect(() => {
     fetchApprovedJobs();
