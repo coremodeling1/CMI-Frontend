@@ -148,12 +148,90 @@ const AdminArtistsPage = () => {
     }
   };
 
+  const identityFields = {
+    model: [
+      { label: "Height", key: "height" },
+      { label: "Weight", key: "weight" },
+      { label: "Bust", key: "bust" },
+      { label: "Waist", key: "waist" },
+      { label: "Hips", key: "hips" },
+      { label: "Night Wear", key: "nightWear" },
+      { label: "Bikini / Swimwear", key: "bikiniSwimwear" },
+      { label: "Bold / Semi Bold", key: "boldSemiBoldWebSeries" },
+      { label: "Nude / Semi Nude", key: "nudeSemiNudeShoots" },
+      { label: "Movie / Ads / Album", key: "movieAdAlbumSongs" },
+      { label: "Calendar / Ads", key: "calendarShootsAds" },
+      { label: "Tattoos on Body", key: "tattoosOnBody" },
+    ],
+
+    advertisingProfessional: [
+      { label: "Height", key: "height" },
+      { label: "Weight", key: "weight" },
+      { label: "Bust", key: "bust" },
+      { label: "Waist", key: "waist" },
+      { label: "Hips", key: "hips" },
+      { label: "Night Wear", key: "nightWear" },
+      { label: "Bikini / Swimwear", key: "bikiniSwimwear" },
+      { label: "Bold / Semi Bold", key: "boldSemiBoldWebSeries" },
+      { label: "Nude / Semi Nude", key: "nudeSemiNudeShoots" },
+      { label: "Movie / Ads / Album", key: "movieAdAlbumSongs" },
+      { label: "Calendar / Ads", key: "calendarShootsAds" },
+      { label: "Tattoos on Body", key: "tattoosOnBody" },
+    ],
+
+    actor: [
+      { label: "Current Project", key: "currentProject" },
+      { label: "Bold Scenes", key: "boldScenes" },
+      { label: "Semi Nude Scenes", key: "semiNudeScenes" },
+      { label: "Web Series", key: "webSeries" },
+      { label: "Item Songs", key: "itemSongs" },
+      { label: "Background Artist", key: "backgroundArtist" },
+      { label: "Love Making Scenes", key: "loveMakingScenes" },
+    ],
+
+    dancer: [
+      { label: "Background Role", key: "backgroundRole" },
+      { label: "Item Songs", key: "itemSongs" },
+      { label: "Bold Shoots", key: "boldShoots" },
+      { label: "Movie / Ads / Album", key: "movieAdsAlbumSongs" },
+    ],
+
+    singer: [
+      { label: "Genres", key: "genres" },
+      { label: "Multiple Languages", key: "multipleLanguages" },
+      { label: "Industry Experience", key: "industryExperience" },
+    ],
+
+    musician: [
+      { label: "Instruments", key: "instruments" },
+      { label: "Adaptable Styles", key: "adaptableStyles" },
+    ],
+
+    stylist: [
+      { label: "Styling Experience", key: "experienceInStyling" },
+      { label: "Comfortable On Set", key: "comfortableOnSet" },
+    ],
+
+    photographer: [
+      { label: "Bold Shoots", key: "boldShoots" },
+      { label: "Semi Nude Shoots", key: "semiNudeShoots" },
+      { label: "Calendar / Ads", key: "calendarShootsAds" },
+    ],
+
+    filmmaker: [
+      { label: "Item Songs", key: "itemSongs" },
+      { label: "Bold Scenes", key: "boldScenes" },
+      { label: "Love Making Scenes", key: "loveMakingScenes" },
+      { label: "Movie / Ads / Album", key: "movieAdsAlbumShoots" },
+    ],
+  };
+
   return (
     <>
       <Navbar />
       <div className="artists-page">
         <h1 className="page-title">Admin - Manage Artists</h1>
-       {/* ✅ FILTERS */}
+        {/* ✅ FILTERS */}
         <div className="filters">
           {/* Status */}
           <select
@@ -239,6 +317,34 @@ const AdminArtistsPage = () => {
                       <strong>Language:</strong> {artist.language || "N/A"}
                     </p>
                     <p>{artist.description}</p>
+
+                    {selectedArtist.artistDetails &&
+                      identityFields[selectedArtist.identity] && (
+                        <div className="artist-extra-fields">
+                          <h3>Professional Details</h3>
+
+                          {identityFields[selectedArtist.identity].map(
+                            ({ label, key }) => {
+                              const value =
+                                selectedArtist.artistDetails?.[
+                                  selectedArtist.identity
+                                ]?.[key];
+
+                              return (
+                                <p key={key}>
+                                  <strong>{label}:</strong>{" "}
+                                  {typeof value === "boolean"
+                                    ? value
+                                      ? "Yes"
+                                      : "No"
+                                    : value || "N/A"}
+                                </p>
+                              );
+                            }
+                          )}
+                        </div>
+                      )}
+
                     <p>
                       <strong>Instagram:</strong>{" "}
                       {artist.instagram ? (
