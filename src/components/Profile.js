@@ -163,12 +163,26 @@ const Profile = () => {
         "language",
         "instagram", // ✅ add
         "instagramFollowers", // ✅ add
+
+        // 🔽 NEW COMMON ARTIST FIELDS
+        "willingToTravel",
+        "experience",
+        "internationalProjects",
+        "availabilityForCasting",
+        "aboutYourself",
       ];
       textFields.forEach((f) => {
         if (updatedUser[f] !== undefined && updatedUser[f] !== null) {
           formData.append(f, updatedUser[f]);
         }
       });
+
+      if (updatedUser.artistDetails && updatedUser.identity) {
+        formData.append(
+          "identityDetails",
+          JSON.stringify(updatedUser.artistDetails[updatedUser.identity] || {})
+        );
+      }
 
       // Profile picture
       if (profilePicFile) {
@@ -221,6 +235,14 @@ const Profile = () => {
     { label: "State", key: "state" },
     { label: "Country", key: "country" },
     { label: "Language", key: "language" },
+
+    // 🔽 NEW COMMON ARTIST FIELDS
+    { label: "Willing to Travel", key: "willingToTravel" },
+    { label: "Experience", key: "experience" },
+    { label: "International Projects", key: "internationalProjects" },
+    { label: "Availability for Casting", key: "availabilityForCasting" },
+    { label: "About Yourself", key: "aboutYourself", textarea: true },
+
     { label: "About", key: "description", textarea: true },
     { label: "Instagram", key: "instagram" },
     { label: "Instagram Followers", key: "instagramFollowers" },
@@ -236,27 +258,122 @@ const Profile = () => {
           (f) => !["instagram", "instagramFollowers"].includes(f.key) // ✅ hide IG fields
         );
 
-  const getStatusLabel = (status) => {
-    if (status === "approved") return "Approved";
-    if (status === "rejected") return "Rejected";
-    return "Pending Approval";
+  // const getStatusLabel = (status) => {
+  //   if (status === "approved") return "Approved";
+  //   if (status === "rejected") return "Rejected";
+  //   return "Pending Approval";
+  // };
+
+  // 🔽 Identity-based extra fields
+  const identityFields = {
+    model: [
+      { label: "Height", key: "artistDetails.model.height" },
+      { label: "Weight", key: "artistDetails.model.weight" },
+      { label: "Bust", key: "artistDetails.model.bust" },
+      { label: "Waist", key: "artistDetails.model.waist" },
+      { label: "Hips", key: "artistDetails.model.hips" },
+      { label: "Bikini / Swimwear", key: "artistDetails.model.bikiniSwimwear" },
+      {
+        label: "Bold / Semi Bold",
+        key: "artistDetails.model.boldSemiBoldWebSeries",
+      },
+      {
+        label: "Nude / Semi Nude",
+        key: "artistDetails.model.nudeSemiNudeShoots",
+      },
+      { label: "Calendar / Ads", key: "artistDetails.model.calendarShootsAds" },
+      { label: "Tattoos on Body", key: "artistDetails.model.tattoosOnBody" },
+    ],
+
+    actor: [
+      { label: "Current Project", key: "artistDetails.actor.currentProject" },
+      { label: "Bold Scenes", key: "artistDetails.actor.boldScenes" },
+      {
+        label: "Love Making Scenes",
+        key: "artistDetails.actor.loveMakingScenes",
+      },
+      { label: "Web Series", key: "artistDetails.actor.webSeries" },
+      {
+        label: "Background Artist",
+        key: "artistDetails.actor.backgroundArtist",
+      },
+    ],
+
+    photographer: [
+      { label: "Bold Shoots", key: "artistDetails.photographer.boldShoots" },
+      {
+        label: "Semi Nude Shoots",
+        key: "artistDetails.photographer.semiNudeShoots",
+      },
+      {
+        label: "Calendar / Ads",
+        key: "artistDetails.photographer.calendarShootsAds",
+      },
+    ],
+
+    filmmaker: [
+      { label: "Item Songs", key: "artistDetails.filmmaker.itemSongs" },
+      { label: "Bold Scenes", key: "artistDetails.filmmaker.boldScenes" },
+      {
+        label: "Love Making Scenes",
+        key: "artistDetails.filmmaker.loveMakingScenes",
+      },
+    ],
+
+    dancer: [
+      { label: "Background Role", key: "artistDetails.dancer.backgroundRole" },
+      { label: "Item Songs", key: "artistDetails.dancer.itemSongs" },
+      { label: "Bold Shoots", key: "artistDetails.dancer.boldShoots" },
+    ],
+
+    singer: [
+      { label: "Genres", key: "artistDetails.singer.genres" },
+      {
+        label: "Multiple Languages",
+        key: "artistDetails.singer.multipleLanguages",
+      },
+    ],
+
+    musician: [
+      { label: "Instruments", key: "artistDetails.musician.instruments" },
+      {
+        label: "Adaptable Styles",
+        key: "artistDetails.musician.adaptableStyles",
+      },
+    ],
+
+    stylist: [
+      {
+        label: "Styling Experience",
+        key: "artistDetails.stylist.experienceInStyling",
+      },
+      {
+        label: "Comfortable On Set",
+        key: "artistDetails.stylist.comfortableOnSet",
+      },
+    ],
   };
+
+  const extraFields =
+    user.role === "artist" && identityFields[user.identity]
+      ? identityFields[user.identity]
+      : [];
 
   return (
     <>
       <Navbar />
       <div className="profile-body">
         {/* ✅ Gallery button ONLY for approved artists */}
-      {user.role === "artist" && user.status === "approved" && (
-        <div className="top-right-btn">
-          <button
-            onClick={() => navigate("/gallery")}
-            className="gallery-btn"
-          >
-            Your Gallery
-          </button>
-        </div>
-      )}
+        {user.role === "artist" && user.status === "approved" && (
+          <div className="top-right-btn">
+            <button
+              onClick={() => navigate("/gallery")}
+              className="gallery-btn"
+            >
+              Your Gallery
+            </button>
+          </div>
+        )}
 
         <div className="profile-container">
           <h2 className="profile-title">Your Profile</h2>
@@ -290,12 +407,11 @@ const Profile = () => {
               )}
 
               {/* 🚫 Gallery locked message */}
-            {user.status !== "approved" && (
-              <p className="status-note error">
-                🚫 Gallery access is locked until your profile is approved.
-              </p>
-            )}
-            
+              {user.status !== "approved" && (
+                <p className="status-note error">
+                  🚫 Gallery access is locked until your profile is approved.
+                </p>
+              )}
             </div>
           )}
 
@@ -393,6 +509,68 @@ const Profile = () => {
                   )}
                 </div>
               ))}
+
+              {extraFields.map(({ label, key }) => {
+                const parts = key.split(".");
+                const root = parts[0]; // artistDetails
+                const role = parts[1]; // model / actor / dancer etc
+                const field = parts[2]; // actual field
+
+                return (
+                  <div key={key} className="form-row">
+                    <label>{label}:</label>
+
+                    {editing ? (
+                      typeof updatedUser[root]?.[role]?.[field] ===
+                      "boolean" ? (
+                        <select
+                          value={
+                            updatedUser[root]?.[role]?.[field] ? "yes" : "no"
+                          }
+                          onChange={(e) =>
+                            setUpdatedUser((prev) => ({
+                              ...prev,
+                              [root]: {
+                                ...(prev[root] || {}),
+                                [role]: {
+                                  ...(prev[root]?.[role] || {}),
+                                  [field]: e.target.value === "yes",
+                                },
+                              },
+                            }))
+                          }
+                        >
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      ) : (
+                        <input
+                          type="text"
+                          value={updatedUser[root]?.[role]?.[field] || ""}
+                          onChange={(e) =>
+                            setUpdatedUser((prev) => ({
+                              ...prev,
+                              [root]: {
+                                ...(prev[root] || {}),
+                                [role]: {
+                                  ...(prev[root]?.[role] || {}),
+                                  [field]: e.target.value,
+                                },
+                              },
+                            }))
+                          }
+                        />
+                      )
+                    ) : (
+                      <p>
+                        {String(
+                          updatedUser[root]?.[role]?.[field] ?? "Not provided"
+                        )}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
