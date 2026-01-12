@@ -318,17 +318,15 @@ const AdminArtistsPage = () => {
                     </p>
                     <p>{artist.description}</p>
 
-                    {selectedArtist.artistDetails &&
-                      identityFields[selectedArtist.identity] && (
+                    {artist.artistDetails &&
+                      identityFields[artist.identity] && (
                         <div className="artist-extra-fields">
                           <h3>Professional Details</h3>
 
-                          {identityFields[selectedArtist.identity].map(
+                          {identityFields[artist.identity].map(
                             ({ label, key }) => {
                               const value =
-                                selectedArtist.artistDetails?.[
-                                  selectedArtist.identity
-                                ]?.[key];
+                                artist.artistDetails?.[artist.identity]?.[key];
 
                               return (
                                 <p key={key}>
