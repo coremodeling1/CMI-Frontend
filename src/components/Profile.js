@@ -285,6 +285,42 @@ const Profile = () => {
       { label: "Tattoos on Body", key: "artistDetails.model.tattoosOnBody" },
     ],
 
+    advertisingProfessional: [
+      { label: "Height", key: "artistDetails.advertisingProfessional.height" },
+      { label: "Weight", key: "artistDetails.advertisingProfessional.weight" },
+      { label: "Bust", key: "artistDetails.advertisingProfessional.bust" },
+      { label: "Waist", key: "artistDetails.advertisingProfessional.waist" },
+      { label: "Hips", key: "artistDetails.advertisingProfessional.hips" },
+      {
+        label: "Night Wear",
+        key: "artistDetails.advertisingProfessional.nightWear",
+      },
+      {
+        label: "Bikini / Swimwear",
+        key: "artistDetails.advertisingProfessional.bikiniSwimwear",
+      },
+      {
+        label: "Bold / Semi Bold",
+        key: "artistDetails.advertisingProfessional.boldSemiBoldWebSeries",
+      },
+      {
+        label: "Nude / Semi Nude",
+        key: "artistDetails.advertisingProfessional.nudeSemiNudeShoots",
+      },
+      {
+        label: "Movie / Ads / Album Songs",
+        key: "artistDetails.advertisingProfessional.movieAdAlbumSongs",
+      },
+      {
+        label: "Calendar / Ads",
+        key: "artistDetails.advertisingProfessional.calendarShootsAds",
+      },
+      {
+        label: "Tattoos on Body",
+        key: "artistDetails.advertisingProfessional.tattoosOnBody",
+      },
+    ],
+
     actor: [
       { label: "Current Project", key: "artistDetails.actor.currentProject" },
       { label: "Bold Scenes", key: "artistDetails.actor.boldScenes" },
