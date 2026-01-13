@@ -292,7 +292,7 @@ const Projects = () => {
                   required
                 />
 
-                <label>Qualifications</label>
+                <label>Experience</label>
                 <input
                   type="text"
                   name="qualifications"

@@ -66,7 +66,7 @@ const PostedJobs = () => {
                 style={{ cursor: "pointer", position: "relative" }}
               >
                 <h3>{job.jobTitle}</h3>
-                <p><strong>Description:</strong> {job.jobDescription}</p>
+                <p className="job-description"><strong>Description:</strong> {job.jobDescription}</p>
                 <p><strong>Required Artist:</strong> {job.requiredArtist}</p>
                 <p><strong>Contact:</strong> {job.contactEmail}, {job.contactPhone}</p>
                 <p><strong>Address:</strong> {job.address}</p>

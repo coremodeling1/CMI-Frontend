@@ -82,6 +82,26 @@
   position: relative;
   border-left: 5px solid #ff0000; /* red accent line */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 520px; /* fixed height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make description scrollable */
+.job-card .job-description {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 6px;
+  line-height: 1.5;
+}
+
+/* Optional: clean scrollbar */
+.job-card .job-description::-webkit-scrollbar {
+  width: 4px;
+}
+.job-card .job-description::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
 }
 
 .job-card:hover {
