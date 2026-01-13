@@ -1,9 +1,8 @@
-
 .blogs-container {
   max-width: 1200px;
   margin: auto;
-  padding: 0px;
-  background-color: #000000; /* black background */
+  padding: 0;
+  background-color: #000;
   margin-top: 70px;
 }
 
@@ -22,14 +21,12 @@
   border-radius: 8px;
   padding: 10px;
   margin-left: -160px;
-
-  /* Fixed height with independent scroll */
   height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* Scrollbar styling for sidebar */
+/* Sidebar scrollbar */
 .blogs-sidebar::-webkit-scrollbar {
   width: 8px;
 }
@@ -53,8 +50,8 @@
 .blog-title-item {
   padding: 10px;
   cursor: pointer;
-  color: #fff;
-  border-bottom: 1px solid #333;
+  color: #000;
+  border-bottom: 1px solid #ddd;
 }
 
 .blog-title-item.active {
@@ -66,43 +63,110 @@
 /* Content area */
 .blogs-content {
   flex: 1;
-
-  /* Fixed height with independent scroll */
   max-height: 600px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 20px;
 }
 
-/* Scrollbar styling for content */
+/* Content scrollbar */
 .blogs-content::-webkit-scrollbar {
   width: 8px;
 }
 
 .blogs-content::-webkit-scrollbar-thumb {
-  background-color: #000;
+  background-color: #444;
   border-radius: 4px;
 }
 
-/* Selected blog styling */
+/* Selected blog */
+.selected-blog {
+  padding-bottom: 40px;
+}
+
+/* Blog title */
 .selected-blog .blog-title {
   font-weight: bold;
   color: #ff0000;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin: 20px 0;
+  font-size: 32px;
 }
 
+/* Blog image */
 .selected-blog .blog-image {
   width: 80%;
   height: auto;
   object-fit: cover;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin: 20px 0;
+  border-radius: 6px;
 }
 
-.selected-blog .blog-content p {
+/* ===============================
+   RICH BLOG CONTENT STYLING
+================================ */
+
+.blog-content {
+  max-width: 800px;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* Paragraphs */
+.blog-content p {
+  margin-bottom: 16px;
   text-align: justify;
-  color: #fff;
-  line-height: 1.6;
 }
 
+/* Headings */
+.blog-content h1 {
+  font-size: 28px;
+  color: #ff0000;
+  margin: 30px 0 15px;
+}
 
+.blog-content h2 {
+  font-size: 24px;
+  color: #ff4d4d;
+  margin: 25px 0 12px;
+}
+
+.blog-content h3 {
+  font-size: 20px;
+  color: #ff8080;
+  margin: 20px 0 10px;
+}
+
+/* Bold / Italic */
+.blog-content strong {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.blog-content em {
+  font-style: italic;
+}
+
+/* Lists */
+.blog-content ul,
+.blog-content ol {
+  padding-left: 25px;
+  margin-bottom: 16px;
+}
+
+.blog-content li {
+  margin-bottom: 8px;
+}
+
+/* Blockquote (optional future use) */
+.blog-content blockquote {
+  border-left: 4px solid #ff0000;
+  padding-left: 15px;
+  color: #ccc;
+  margin: 20px 0;
+}
+
+/* Links */
+.blog-content a {
+  color: #ff4d4d;
+  text-decoration: underline;
+}
