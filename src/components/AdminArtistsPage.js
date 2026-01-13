@@ -316,7 +316,7 @@ const AdminArtistsPage = () => {
                     <p>
                       <strong>Language:</strong> {artist.language || "N/A"}
                     </p>
-                    <p>{artist.description}</p>
+                    <p> <strong>Description:</strong> {artist.description}</p>
 
                     {artist.artistDetails &&
                       identityFields[artist.identity] && (
@@ -527,6 +527,31 @@ const AdminArtistsPage = () => {
                   <strong>Followers:</strong>{" "}
                   {selectedArtist.instagramFollowers || "N/A"}
                 </p>
+
+                {selectedArtist.artistDetails &&
+                      identityFields[selectedArtist.identity] && (
+                        <div className="artist-extra-fields">
+                          <h3>Professional Details</h3>
+
+                          {identityFields[artist.identity].map(
+                            ({ label, key }) => {
+                              const value =
+                                selectedArtist.artistDetails?.[selectedArtist.identity]?.[key];
+
+                              return (
+                                <p key={key}>
+                                  <strong>{label}:</strong>{" "}
+                                  {typeof value === "boolean"
+                                    ? value
+                                      ? "Yes"
+                                      : "No"
+                                    : value || "N/A"}
+                                </p>
+                              );
+                            }
+                          )}
+                        </div>
+                      )}
 
                 <p>
                   <strong>Status:</strong> {selectedArtist.status || "pending"}
