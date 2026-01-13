@@ -154,7 +154,11 @@ const AdminBlogs = () => {
                 className="blog-file"
               />
 
-              <button type="submit" className="blog-submit-btn">
+              <button
+                type="submit"
+                className="blog-submit-btn"
+                onClick={(e) => handlePostBlog(e)} // ensure onClick works
+              >
                 Post Blog
               </button>
             </form>
