@@ -205,6 +205,7 @@
 }
 
 .blog-content p {
+  color: #ffffff; /* white text */
   margin-bottom: 16px;
   text-align: justify;
 }
@@ -212,26 +213,31 @@
 .blog-content h1 {
   font-size: 28px;
   margin: 30px 0 15px;
+  color: #ffffff;
 }
 
 .blog-content h2 {
   font-size: 24px;
   margin: 25px 0 12px;
+  color: #ffffff;
 }
 
 .blog-content h3 {
   font-size: 20px;
   margin: 20px 0 10px;
+  color: #ffffff;
 }
 
 .blog-content ul,
 .blog-content ol {
   padding-left: 25px;
   margin-bottom: 16px;
+  color: #ffffff;
 }
 
 .blog-content li {
   margin-bottom: 8px;
+  color: #ffffff;
 }
 
 /* ===============================
@@ -302,4 +308,9 @@
   .selected-blog .blog-image {
     width: 100%;
   }
+}
+
+.blog-content,
+.blog-content * {
+  color: #ffffff !important;
 }
