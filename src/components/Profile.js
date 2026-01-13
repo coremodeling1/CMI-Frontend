@@ -564,6 +564,8 @@ const Profile = () => {
                     )
                   ) : key === "dob" ? (
                     <p>{formatDate(updatedUser.dob)}</p>
+                  ) : typeof updatedUser[key] === "boolean" ? (
+                    <p>{updatedUser[key] ? "Yes" : "No"}</p>
                   ) : (
                     <p>{updatedUser[key] || "Not provided"}</p>
                   )}
