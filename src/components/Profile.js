@@ -500,22 +500,50 @@ const Profile = () => {
               {fields.map(({ label, key, textarea }) => (
                 <div key={key} className="form-row">
                   <label>{label}:</label>
+
                   {editing ? (
-                    textarea ? (
+                    // 🔒 ROLE – always locked
+                    key === "role" ? (
+                      <input
+                        type="text"
+                        value={updatedUser.role || ""}
+                        disabled
+                      />
+                    ) : key === "identity" && user.role === "artist" ? (
+                      // 🎯 IDENTITY – dropdown for artists
+                      <select
+                        name="identity"
+                        value={updatedUser.identity || ""}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Identity</option>
+                        <option value="model">Model</option>
+                        <option value="actor">Actor</option>
+                        <option value="influencer">Influencer</option>
+                        <option value="singer">Singer</option>
+                        <option value="musician">Musician</option>
+                        <option value="dancer">Dancer</option>
+                        <option value="writer">Writer</option>
+                        <option value="anchor">Anchor</option>
+                        <option value="stylist">Stylist</option>
+                        <option value="advertisingProfessional">
+                          Advertising Professional
+                        </option>
+                        <option value="voice-over artist">
+                          Voice-over Artist
+                        </option>
+                        <option value="photographer">Photographer</option>
+                        <option value="filmmaker">Filmmaker</option>
+                        <option value="standup-comedian">
+                          Standup Comedian
+                        </option>
+                      </select>
+                    ) : textarea ? (
                       <textarea
                         name={key}
                         value={updatedUser[key] || ""}
                         onChange={handleChange}
                         rows="4"
-                        style={{
-                          resize: "vertical",
-                          overflowWrap: "break-word",
-                          whiteSpace: "pre-wrap",
-                        }}
-                        disabled={
-                          user.role === "recruiter" &&
-                          ["role", "identity"].includes(key)
-                        }
                       />
                     ) : key === "dob" ? (
                       <input
@@ -532,10 +560,6 @@ const Profile = () => {
                         name={key}
                         value={updatedUser[key] || ""}
                         onChange={handleChange}
-                        disabled={
-                          user.role === "recruiter" &&
-                          ["role", "identity"].includes(key)
-                        }
                       />
                     )
                   ) : key === "dob" ? (
