@@ -533,7 +533,7 @@ const AdminArtistsPage = () => {
                         <div className="artist-extra-fields">
                           <h3>Professional Details</h3>
 
-                          {identityFields[artist.identity].map(
+                          {identityFields[selectedArtist.identity].map(
                             ({ label, key }) => {
                               const value =
                                 selectedArtist.artistDetails?.[selectedArtist.identity]?.[key];
