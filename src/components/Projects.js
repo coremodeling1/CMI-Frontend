@@ -213,7 +213,7 @@ const Projects = () => {
             filteredJobs.map((job) => (
               <div className="project-card" key={job._id}>
                 <h3>{job.jobTitle}</h3>
-                <p>
+                <p className="job-description">
                   <strong>Description:</strong> {job.jobDescription}
                 </p>
                 <p>

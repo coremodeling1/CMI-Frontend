@@ -12,14 +12,34 @@
   border-radius: 15px;
   padding: 25px;
   width: 320px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
+  height: 420px; /* fixed height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make description scrollable */
+.job-card .job-description {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 6px;
+  line-height: 1.5;
+}
+
+/* Optional: clean scrollbar */
+.job-card .job-description::-webkit-scrollbar {
+  width: 4px;
+}
+.job-card .job-description::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
 }
 
 .job-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
 }
 
 .job-card h3 {
@@ -86,17 +106,15 @@
 }
 
 .page-title {
-  text-align: center;      /* centers the text horizontally */
-  font-size: 2rem;         /* increase font size */
-  font-weight: 700;        /* make it bold */
-  color: #ffffff;       /* top and bottom spacing */
-  letter-spacing: 1px;     /* optional spacing for style */
+  text-align: center; /* centers the text horizontally */
+  font-size: 2rem; /* increase font size */
+  font-weight: 700; /* make it bold */
+  color: #ffffff; /* top and bottom spacing */
+  letter-spacing: 1px; /* optional spacing for style */
   background-color: #000000;
-       font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
-  font-weight:400;
+  font-weight: 400;
   padding: 20px;
-  margin-top :0px;
- 
-
+  margin-top: 0px;
 }

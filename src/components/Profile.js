@@ -625,9 +625,12 @@ const Profile = () => {
                       )
                     ) : (
                       <p>
-                        {String(
-                          updatedUser[root]?.[role]?.[field] ?? "Not provided"
-                        )}
+                        {typeof updatedUser[root]?.[role]?.[field] === "boolean"
+                          ? updatedUser[root][role][field]
+                            ? "Yes"
+                            : "No"
+                          : updatedUser[root]?.[role]?.[field] ||
+                            "Not provided"}
                       </p>
                     )}
                   </div>
