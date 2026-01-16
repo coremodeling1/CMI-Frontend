@@ -201,10 +201,10 @@ const HomePage = () => {
           {[
             { name: "Model", img: "/images/model.jpg" },
             { name: "Actor", img: "/images/actor.jpg" },
-            { name: "Influencer", img: "/images/influencer.jpg" },
+            { name: "Influencer", img: "/images/influencer.JPG" },
             { name: "Writer", img: "/images/writer.jpg" },
-            { name: "Stylist", img: "/images/stylist.jpg" },
-            { name: "Photographer", img: "/images/photographer.jpg" },
+            { name: "Stylist", img: "/images/stylist.JPG" },
+            { name: "Photographer", img: "/images/photographer.JPG" },
             { name: "Advertising Professional", img: "/images/advertise.avif" },
             { name: "Singer", img: "/images/singer.jpg" },
             { name: "Musician", img: "/images/musician.jpg" },
@@ -212,7 +212,7 @@ const HomePage = () => {
             { name: "Anchor", img: "/images/anchor.jpg" },
             { name: "Voice-over Artist", img: "/images/voiceover.jpg" },
             { name: "Filmmaker", img: "/images/filmmaker.jpg" },
-            { name: "Standup Comedian", img: "/images/standup.jpg" },
+            { name: "Standup Comedian", img: "/images/standup.JPG" },
           ].map((cat, index) => (
             <div
               key={index}
