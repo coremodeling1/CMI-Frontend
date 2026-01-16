@@ -20,8 +20,8 @@ import BuyPremium from "./components/BuyPremium"; // ✅ Import
 
 // Wrapper to conditionally render Navbar
 const AppWrapper = () => {
-  const location = useLocation();
-  const hideNavbarPaths = ["/", "/signup"]; // paths where Navbar should be hidden
+  // const location = useLocation();
+  // const hideNavbarPaths = ["/", "/signup"]; // paths where Navbar should be hidden
   // const showNavbar = !hideNavbarPaths.includes(location.pathname);
 
   return (
