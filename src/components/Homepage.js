@@ -4,9 +4,9 @@ import Footer from "./Footer";
 import "../styles/style.css";
 import "../styles/homepage.css"
 
-import about1 from "../images/about1.jpg"
-import about2 from "../images/about2.jpg"
-import about3 from "../images/about3.jpg"
+import about1 from "../images/about1. JPG"
+import about2 from "../images/about2.JPG"
+import about3 from "../images/about3.JPG"
 import step1 from "../images/step1.png"
 import applyProject from "../images/apply-project.jpeg"
 import artist from "../images/artist.jpeg"
@@ -138,16 +138,16 @@ const HomePage = () => {
           {/* Right Side - Images */}
           <div className="about-images slide-in-left delay-2">
             <div className="main-image">
-              <img src={about1} alt="CoreModeling Showcase" />
+              <img src={about3} alt="CoreModeling Showcase" />
       
               {/* Left Overlay Image */}
               <div className="overlay-image overlay-left slide-in-left delay-3">
-                <img src={about2} alt="Artist Portfolio" />
+                <img src={about1} alt="Artist Portfolio" />
               </div>
       
               {/* Right Overlay Image */}
               <div className="overlay-image overlay-right slide-in-left delay-4">
-                <img src={about3} alt="Recruiter Hiring" />
+                <img src={about2} alt="Recruiter Hiring" />
               </div>
             </div>
           </div>

@@ -4,9 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import "../styles/style.css";
 import slide1 from "../images/slide1.jpg";
 import step1 from "../images/step1.png";
-import about1 from "../images/about1.jpg";
-import about2 from "../images/about2.jpg";
-import about3 from "../images/about3.jpg";
+import about1 from "../images/about1.JPG";
+import about2 from "../images/about2.JPG";
+import about3 from "../images/about3.JPG";
 import Signup from "./Signup";
 import logo from "../images/logo.png";
 import "../styles/responsive.css";
@@ -224,16 +224,16 @@ const Login = () => {
           {/* Right Side - Images */}
           <div className="about-images">
             <div className="main-image">
-              <img src={about1} alt="CoreModeling Showcase" />
+              <img src={about3} alt="CoreModeling Showcase" />
 
               {/* Left Overlay Image */}
               <div className="overlay-image overlay-left">
-                <img src={about2} alt="Artist Portfolio" />
+                <img src={about1} alt="Artist Portfolio" />
               </div>
 
               {/* Right Overlay Image */}
               <div className="overlay-image overlay-right">
-                <img src={about3} alt="Recruiter Hiring" />
+                <img src={about2} alt="Recruiter Hiring" />
               </div>
             </div>
           </div>
