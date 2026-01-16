@@ -106,7 +106,7 @@ const stepsData = [
   
 useEffect(() => {
   const accessToken = process.env.REACT_APP_IG_ACCESS_TOKEN;  
-  const userId = process.env.REACT_APP_IG_USER_ID;
+  // const userId = process.env.REACT_APP_IG_USER_ID;
 
   async function fetchInstagramFeed() {
     try {

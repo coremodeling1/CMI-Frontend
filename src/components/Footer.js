@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/style.css";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import "../styles/responsive.css";
 import { useNavigate } from "react-router-dom";
 
