@@ -169,20 +169,33 @@ return (
 
 
        {/* Features Section */}
-      <section className="features">
-        <div className="feature-card">
-          <h2> For Artists</h2>
-          <p>Showcase your talent and connect with top recruiters worldwide.</p>
-        </div>
-        <div className="feature-card">
-          <h2> For Recruiters</h2>
-          <p>Discover passionate artists and build your dream team easily.</p>
-        </div>
-        <div className="feature-card">
-          <h2> Blogs & Updates</h2>
-          <p>Stay inspired with the latest trends and success stories.</p>
-        </div>
-      </section>
+      <section className="homepage-features">
+          <div
+            className="homepage-feature-card"
+            onClick={() => navigate("/signup?role=artist")}
+          >
+            <h2>For Artists</h2>
+            <p>
+              Showcase your talent and connect with top recruiters worldwide.
+            </p>
+          </div>
+
+          <div
+            className="homepage-feature-card"
+            onClick={() => navigate("/signup?role=recruiter")}
+          >
+            <h2>For Recruiters</h2>
+            <p>Discover passionate artists and build your dream team easily.</p>
+          </div>
+
+          <div
+            className="homepage-feature-card"
+            onClick={() => navigate("/blogs")}
+          >
+            <h2>Blogs & Updates</h2>
+            <p>Stay inspired with the latest trends and success stories.</p>
+          </div>
+        </section>
     </div>
 
 
