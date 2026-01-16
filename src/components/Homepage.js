@@ -4,9 +4,9 @@ import Footer from "./Footer";
 import "../styles/style.css";
 import "../styles/homepage.css"
 
-import about1 from "../images/about1. JPG"
-import about2 from "../images/about2.JPG"
-import about3 from "../images/about3.JPG"
+import about1 from "../images/about1. jpg"
+import about2 from "../images/about2.jpg"
+import about3 from "../images/about3.jpg"
 import step1 from "../images/step1.png"
 import applyProject from "../images/apply-project.jpeg"
 import artist from "../images/artist.jpeg"
