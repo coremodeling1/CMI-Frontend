@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../styles/style.css";
 
+
 const Signup = () => {
-  const [role, setRole] = useState("artist");
+
   const [identity, setIdentity] = useState("");
+  const location = useLocation();
+
+const [role, setRole] = useState(
+  location.state?.role || "artist"
+);
   const [formData, setFormData] = useState({
     name: "",
     email: "",

@@ -93,7 +93,7 @@ const HomePage = () => {
         <section className="homepage-features">
           <div
             className="homepage-feature-card"
-            onClick={() => navigate("/signup?role=artist")}
+            onClick={() => navigate("/signup", { state: { role: "artist" } })}
           >
             <h2>For Artists</h2>
             <p>
@@ -103,7 +103,9 @@ const HomePage = () => {
 
           <div
             className="homepage-feature-card"
-            onClick={() => navigate("/signup?role=recruiter")}
+            onClick={() =>
+              navigate("/signup", { state: { role: "recruiter" } })
+            }
           >
             <h2>For Recruiters</h2>
             <p>Discover passionate artists and build your dream team easily.</p>
