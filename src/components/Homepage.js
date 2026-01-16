@@ -12,8 +12,6 @@ import applyProject from "../images/apply-project.jpeg"
 import artist from "../images/artist.jpeg"
 import gallery from "../images/gallery.jpeg"
 import postProject from "../images/post-project.jpeg"
-import { useNavigate } from "react-router-dom";
-
 
 
 
@@ -21,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [instagramPosts, setInstagramPosts] = useState([]);
-  const navigate = useNavigate();
+
 
 
   
@@ -106,31 +104,19 @@ const HomePage = () => {
         </header>
 
         <section className="homepage-features">
-  <div
-    className="homepage-feature-card"
-    onClick={() => navigate("/signup", { state: { role: "artist" } })}
-  >
-    <h2>For Artists</h2>
-    <p>Showcase your talent and connect with top recruiters worldwide.</p>
-  </div>
-
-  <div
-    className="homepage-feature-card"
-    onClick={() => navigate("/signup", { state: { role: "recruiter" } })}
-  >
-    <h2>For Recruiters</h2>
-    <p>Discover passionate artists and build your dream team easily.</p>
-  </div>
-
-  <div
-    className="homepage-feature-card"
-    onClick={() => navigate("/blogs")}
-  >
-    <h2>Blogs & Updates</h2>
-    <p>Stay inspired with the latest trends and success stories.</p>
-  </div>
-</section>
-
+          <div className="homepage-feature-card">
+            <h2>For Artists</h2>
+            <p>Showcase your talent and connect with top recruiters worldwide.</p>
+          </div>
+          <div className="homepage-feature-card">
+            <h2>For Recruiters</h2>
+            <p>Discover passionate artists and build your dream team easily.</p>
+          </div>
+          <div className="homepage-feature-card">
+            <h2>Blogs & Updates</h2>
+            <p>Stay inspired with the latest trends and success stories.</p>
+          </div>
+        </section>
       </div>
   
   
