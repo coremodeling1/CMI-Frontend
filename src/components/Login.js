@@ -377,15 +377,6 @@ const Login = () => {
               </details>
 
               <details>
-                <summary>What kind of projects are available?</summary>
-                <p>
-                  Projects include modeling shoots, ad campaigns, fashion shows,
-                  short films, music videos, brand promotions, and social media
-                  collaborations.
-                </p>
-              </details>
-
-              <details>
                 <summary>
                   Do you charge any registration or onboarding fees?
                 </summary>
@@ -432,15 +423,6 @@ const Login = () => {
                   Premium access allows you to post projects, view complete
                   artist profiles, portfolios, media galleries, and contact
                   artists directly.
-                </p>
-              </details>
-
-              <details>
-                <summary>What kind of artists are available?</summary>
-                <p>
-                  Models, actors, influencers, musicians, photographers,
-                  dancers, writers, filmmakers, and other creative
-                  professionals.
                 </p>
               </details>
 
