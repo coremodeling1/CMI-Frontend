@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useCallback } from "react";
 import "../styles/AppliedJobs.css";
 
 const backendURL = "https://cmi-backend-6xf1.onrender.com";
@@ -11,7 +12,7 @@ const AppliedJobs = () => {
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
   // ✅ Fetch applied jobs for logged-in user
-  const fetchAppliedJobs = async () => {
+  const fetchAppliedJobs = useCallback(async () => {
     if (!loggedInUser) return;
 
     try {
@@ -21,11 +22,11 @@ const AppliedJobs = () => {
     } catch (err) {
       console.error("Error fetching applied jobs:", err);
     }
-  };
+  }, [loggedInUser])
 
   useEffect(() => {
     fetchAppliedJobs();
-  }, []);
+  }, [fetchAppliedJobs]);
 
   return (
     <>

@@ -22,7 +22,7 @@ import BuyPremium from "./components/BuyPremium"; // ✅ Import
 const AppWrapper = () => {
   const location = useLocation();
   const hideNavbarPaths = ["/", "/signup"]; // paths where Navbar should be hidden
-  const showNavbar = !hideNavbarPaths.includes(location.pathname);
+  // const showNavbar = !hideNavbarPaths.includes(location.pathname);
 
   return (
     <>

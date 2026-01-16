@@ -133,7 +133,7 @@ const Gallery = () => {
             <div className="photos-grid">
               {gallery.photos.map((photo, i) => (
                 <div key={i} className="photo-item">
-                  <img src={photo} alt={`Photo ${i + 1}`} className="gallery-photo" />
+                  <img src={photo} alt={`gallery ${i + 1}`} className="gallery-photo" />
                   <button
                     className="delete-btn"
                     onClick={() => handleDelete(photo, "photo")}
