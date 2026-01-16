@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
-import { useLocation } from "react-router-dom";
 
-const Signup = () => {
-  const location = useLocation();
-  const [role, setRole] = useState(
-  location.state?.role || "artist"
-);
+const Signup = ({ role: initialRole = "artist" }) => {
+  const [role, setRole] = useState(initialRole);
   const [identity, setIdentity] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -49,6 +45,10 @@ const Signup = () => {
   const handleFileChange = (e) => {
     setFiles(Array.from(e.target.files));
   };
+
+  useEffect(() => {
+    setRole(initialRole);
+  }, [initialRole]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -379,4 +379,3 @@ const Signup = () => {
 };
 
 export default Signup;
- 
