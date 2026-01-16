@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import "../styles/style.css";
 import "../styles/homepage.css"
 
-import about1 from "../images/about1. jpg"
+import about1 from "../images/about1.jpg"
 import about2 from "../images/about2.jpg"
 import about3 from "../images/about3.jpg"
 import step1 from "../images/step1.png"
