@@ -296,10 +296,10 @@ const Login = () => {
           {[
             { name: "Model", img: "/images/model.jpg" },
             { name: "Actor", img: "/images/actor.jpg" },
-            { name: "Influencer", img: "/images/influencer.webp" },
+            { name: "Influencer", img: "/images/influencer.jpg" },
             { name: "Writer", img: "/images/writer.jpg" },
-            { name: "Stylist", img: "/images/stylist.avif" },
-            { name: "Photographer", img: "/images/photographer.avif" },
+            { name: "Stylist", img: "/images/stylist.jpg" },
+            { name: "Photographer", img: "/images/photographer.jpg" },
             { name: "Advertising Professional", img: "/images/advertise.avif" },
             { name: "Singer", img: "/images/singer.jpg" },
             { name: "Musician", img: "/images/musician.jpg" },
@@ -307,7 +307,7 @@ const Login = () => {
             { name: "Anchor", img: "/images/anchor.jpg" },
             { name: "Voice-over Artist", img: "/images/voiceover.jpg" },
             { name: "Filmmaker", img: "/images/filmmaker.jpg" },
-            { name: "Standup Comedian", img: "/images/standup.avif" },
+            { name: "Standup Comedian", img: "/images/standup.jpg" },
           ].map((cat, index) => (
             <div
               key={index}
