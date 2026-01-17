@@ -1,4 +1,4 @@
-// PostedJobs.js - Complete improved code
+// PostedJobs.js - Complete improved code with View Applicants button
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -11,6 +11,7 @@ const PostedJobs = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   const applicantsRef = useRef(null);
 
@@ -30,7 +31,15 @@ const PostedJobs = () => {
     fetchJobs();
   }, [user]);
 
-  const handleJobClick = async (jobId) => {
+  const handleViewApplicants = async (jobId, job) => {
+    if (selectedJob === jobId) {
+      // Toggle off if already viewing
+      setSelectedJob(null);
+      setApplications([]);
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await fetch(`${backendURL}/api/applications/job/${jobId}`, {
         headers: { Authorization: `Bearer ${user?.token}` },
@@ -40,7 +49,7 @@ const PostedJobs = () => {
       const approvedApps = data.filter((app) => app.user?.status === "approved");
 
       setSelectedJob(jobId);
-      setSelectedJobDetails(jobs.find((j) => j._id === jobId));
+      setSelectedJobDetails(job);
       setApplications(approvedApps);
 
       setTimeout(() => {
@@ -48,6 +57,8 @@ const PostedJobs = () => {
       }, 200);
     } catch (err) {
       console.error("Error fetching applications:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,82 +70,85 @@ const PostedJobs = () => {
         {jobs.length > 0 ? (
           <div className="job-cards-container">
             {jobs.map((job) => (
-              <div
-                className="job-card"
-                key={job._id}
-                onClick={() => handleJobClick(job._id)}
-                style={{ cursor: "pointer", position: "relative" }}
-              >
-                <h3>{job.jobTitle}</h3>
-                <p className="job-description">
-                  <strong>Description:</strong> {job.jobDescription}
-                </p>
-                <p>
-                  <strong>Required Artist:</strong> {job.requiredArtist}
-                </p>
-                <p>
-                  <strong>Contact:</strong> {job.contactEmail}, {job.contactPhone}
-                </p>
-                <p>
-                  <strong>Address:</strong> {job.address}
-                </p>
+              <div className="job-card-wrapper" key={job._id}>
+                <div className="job-card">
+                  <div className="job-header">
+                    <h3>{job.jobTitle}</h3>
+                    <div className="job-badge">
+                      {applications.length > 0 && selectedJob === job._id 
+                        ? `${applications.length} applicants`
+                        : 'New'
+                      }
+                    </div>
+                  </div>
+                  
+                  <div className="job-description-scroll">
+                    <p><strong>Description:</strong> {job.jobDescription}</p>
+                  </div>
+                  
+                  <div className="job-details">
+                    <p><strong>Artist:</strong> {job.requiredArtist}</p>
+                    <p><strong>Contact:</strong> {job.contactEmail}</p>
+                    <p><strong>Location:</strong> {job.address}</p>
+                  </div>
+
+                  <button
+                    className={`view-applicants-btn ${
+                      selectedJob === job._id ? 'active' : ''
+                    } ${loading && selectedJob === job._id ? 'loading' : ''}`}
+                    onClick={() => handleViewApplicants(job._id, job)}
+                    disabled={loading}
+                  >
+                    {loading ? 'Loading...' : 
+                     selectedJob === job._id ? 'Hide Applicants' : 'View Applicants'
+                    }
+                  </button>
+                </div>
+
+                {/* Inline applicants for this job */}
+                {selectedJob === job._id && applications.length > 0 && (
+                  <div className="inline-applicants" ref={applicantsRef}>
+                    <div className="applicants-section">
+                      <h3>
+                        Approved Applicants for <span>{job.jobTitle}</span>
+                      </h3>
+                      <div className="applicants-grid">
+                        {applications.map((app) => (
+                          <div key={app._id} className="applicant-card">
+                            <div className="applicant-header">
+                              <h4>{app.fullName}</h4>
+                              <span className="approved-badge">Approved</span>
+                            </div>
+                            <div className="applicant-details">
+                              <p><strong>Email:</strong> {app.email}</p>
+                              <p><strong>Phone:</strong> {app.contact}</p>
+                              <p><strong>Experience:</strong> {app.qualifications}</p>
+                              <p><strong>Location:</strong> {app.city}, {app.state}</p>
+                              <p><strong>DOB:</strong> {app.dob}</p>
+                            </div>
+                            {app.cv && (
+                              <div className="cv-section">
+                                <a
+                                  href={app.cv}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="cv-link"
+                                >
+                                  📄 View CV
+                                </a>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         ) : (
-          <p>No jobs posted yet.</p>
-        )}
-
-        {/* Show Applicants */}
-        {selectedJob && (
-          <div className="applicants-section" ref={applicantsRef}>
-            <h3>
-              Approved Applicants for:{" "}
-              <span>{selectedJobDetails?.jobTitle}</span>
-            </h3>
-            {applications.length > 0 ? (
-              applications.map((app) => (
-                <div key={app._id} className="applicant-card">
-                  <p>
-                    <strong>Full Name:</strong> {app.fullName}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {app.email}
-                  </p>
-                  <p>
-                    <strong>Contact:</strong> {app.contact}
-                  </p>
-                  <p>
-                    <strong>Experience:</strong> {app.qualifications}
-                  </p>
-                  <p>
-                    <strong>DOB:</strong> {app.dob}
-                  </p>
-                  <p>
-                    <strong>City:</strong> {app.city}
-                  </p>
-                  <p>
-                    <strong>State:</strong> {app.state}
-                  </p>
-                  {app.cv && (
-                    <p>
-                      <strong>CV:</strong>{" "}
-                      <a
-                        href={app.cv}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cv-link"
-                      >
-                        View CV
-                      </a>
-                    </p>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p>No approved applicants yet.</p>
-            )}
-          </div>
+          <p className="empty-state">No jobs posted yet. Create your first project!</p>
         )}
       </div>
       <Footer />
