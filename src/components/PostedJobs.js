@@ -9,7 +9,7 @@ const backendURL = "https://cmi-backend-6xf1.onrender.com";
 const PostedJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [selectedJobDetails, setSelectedJobDetails] = useState(null);
+  // const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -49,7 +49,7 @@ const PostedJobs = () => {
       const approvedApps = data.filter((app) => app.user?.status === "approved");
 
       setSelectedJob(jobId);
-      setSelectedJobDetails(job);
+      // setSelectedJobDetails(job);
       setApplications(approvedApps);
 
       setTimeout(() => {
