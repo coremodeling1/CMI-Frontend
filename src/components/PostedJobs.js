@@ -8,14 +8,16 @@ const backendURL = "https://cmi-backend-6xf1.onrender.com";
 const PostedJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [selectedJobDetails, setSelectedJobDetails] = useState(null); // ✅ store job details
+  const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  const applicantsRef = useRef(null); // ✅ for scrolling
+  const applicantsRef = useRef(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`${backendURL}/api/jobs`, {
           headers: { Authorization: `Bearer ${user?.token}` },
         });
@@ -24,6 +26,8 @@ const PostedJobs = () => {
         setJobs(myJobs);
       } catch (err) {
         console.error("Error fetching posted jobs:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchJobs();
@@ -31,6 +35,7 @@ const PostedJobs = () => {
 
   const handleJobClick = async (jobId) => {
     try {
+      setLoading(true);
       const res = await fetch(`${backendURL}/api/applications/job/${jobId}`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
@@ -39,73 +44,133 @@ const PostedJobs = () => {
       const approvedApps = data.filter((app) => app.user?.status === "approved");
 
       setSelectedJob(jobId);
-      setSelectedJobDetails(jobs.find((j) => j._id === jobId)); // ✅ save full job details
+      setSelectedJobDetails(jobs.find((j) => j._id === jobId));
       setApplications(approvedApps);
 
-      // ✅ Scroll down to applicants section
       setTimeout(() => {
         applicantsRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 200);
     } catch (err) {
       console.error("Error fetching applications:", err);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  // ✅ Force download PDF instead of preview
+  const getDownloadUrl = (cvUrl) => {
+    if (!cvUrl) return cvUrl;
+    return cvUrl.replace('/upload/', '/upload/fl_attachment/');
   };
 
   return (
     <>
       <Navbar />
       <div className="posted-jobs-page">
-        <h2>Your Posted Projects</h2>
+        <div className="page-header">
+          <h2>Your Posted Projects</h2>
+          {loading && <div className="loading-spinner">Loading...</div>}
+        </div>
+
         {jobs.length > 0 ? (
           <div className="job-cards-container">
             {jobs.map((job) => (
               <div
-                className="job-card"
+                className={`job-card ${selectedJob === job._id ? 'selected' : ''}`}
                 key={job._id}
                 onClick={() => handleJobClick(job._id)}
-                style={{ cursor: "pointer", position: "relative" }}
               >
-                <h3>{job.jobTitle}</h3>
-                <p className="job-description"><strong>Description:</strong> {job.jobDescription}</p>
-                <p><strong>Required Artist:</strong> {job.requiredArtist}</p>
-                <p><strong>Contact:</strong> {job.contactEmail}, {job.contactPhone}</p>
-                <p><strong>Address:</strong> {job.address}</p>
+                <div className="job-header">
+                  <h3>{job.jobTitle}</h3>
+                  <span className="job-badge">Click to view applicants</span>
+                </div>
+                <div className="job-description">
+                  <p><strong>Description:</strong> {job.jobDescription}</p>
+                </div>
+                <div className="job-details">
+                  <p><strong>🎨 Artist:</strong> {job.requiredArtist}</p>
+                  <p><strong>📧 Contact:</strong> {job.contactEmail}</p>
+                  <p><strong>📍 Location:</strong> {job.address}</p>
+                </div>
+                {selectedJob === job._id && (
+                  <div className="selected-indicator">
+                    ↓ Viewing applicants
+                  </div>
+                )}
               </div>
             ))}
           </div>
         ) : (
-          <p>No jobs posted yet.</p>
+          <div className="empty-state">
+            <p>No jobs posted yet. <a href="/post-job">Post your first project!</a></p>
+          </div>
         )}
 
-        {/* Show Applicants */}
+        {/* Enhanced Applicants Section */}
         {selectedJob && (
           <div className="applicants-section" ref={applicantsRef}>
-            <h3>
-              Approved Applicants for:{" "}
-              <span style={{ color: "white" }}>{selectedJobDetails?.jobTitle}</span>
-            </h3>
+            <div className="section-header">
+              <h3>
+                🎯 Approved Applicants for: <span>{selectedJobDetails?.jobTitle}</span>
+              </h3>
+              <div className="applicant-count">
+                {applications.length} approved applicant{applications.length !== 1 ? 's' : ''}
+              </div>
+            </div>
+
             {applications.length > 0 ? (
-              applications.map((app) => (
-                <div key={app._id} className="applicant-card">
-                  <p><strong>Full Name:</strong> {app.fullName}</p>
-                  <p><strong>Email:</strong> {app.email}</p>
-                  <p><strong>Contact:</strong> {app.contact}</p>
-                  <p><strong>Qualifications:</strong> {app.qualifications}</p>
-                  <p><strong>DOB:</strong> {app.dob}</p>
-                  <p><strong>City:</strong> {app.city}</p>
-                  <p><strong>State:</strong> {app.state}</p>
-                  {app.cv && (
-                    <p>
-                      <strong>CV:</strong>{" "}
-                      <a href={app.cv} target="_blank" rel="noopener noreferrer">
-                        View CV
-                      </a>
-                    </p>
-                  )}
-                </div>
-              ))
+              <div className="applicants-grid">
+                {applications.map((app) => (
+                  <div key={app._id} className="applicant-card">
+                    <div className="applicant-header">
+                      <div className="applicant-avatar">
+                        {app.fullName.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="applicant-info">
+                        <h4>{app.fullName}</h4>
+                        <span className="location">{app.city}, {app.state}</span>
+                      </div>
+                    </div>
+
+                    <div className="applicant-details">
+                      <div className="detail-row">
+                        <span className="label">📧 Email:</span>
+                        <span>{app.email}</span>
+                      </div>
+                      <div className="detail-row">
+                        <span className="label">📞 Contact:</span>
+                        <span>{app.contact}</span>
+                      </div>
+                      <div className="detail-row">
+                        <span className="label">🎓 Experience:</span>
+                        <span>{app.qualifications}</span>
+                      </div>
+                      <div className="detail-row">
+                        <span className="label">📅 DOB:</span>
+                        <span>{app.dob}</span>
+                      </div>
+                    </div>
+
+                    {app.cv && (
+                      <div className="cv-download">
+                        <a 
+                          href={getDownloadUrl(app.cv)} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="download-btn"
+                          download
+                        >
+                          📄 Download CV
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             ) : (
-              <p>No approved applicants yet.</p>
+              <div className="no-applicants">
+                <p>No approved applicants yet. Keep your job active to attract more artists!</p>
+              </div>
             )}
           </div>
         )}
