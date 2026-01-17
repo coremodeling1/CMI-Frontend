@@ -113,16 +113,7 @@ const HomePage = () => {
             <p className="intro">Welcome to CoreModeling</p>
             <h2 className="title">Connecting Artists & Recruiters</h2>
             <p className="description">
-              CoreModeling is a dedicated platform that connects talented
-              artists with recruiters, creating a space where creativity meets
-              opportunity. Artists can showcase their work, apply for projects,
-              and grow their careers with global visibility.
-            </p>
-            <p className="description">
-              Recruiters gain access to a diverse pool of skilled professionals,
-              making it easier to discover and hire the right talent. With a
-              user friendly experience, CoreModeling simplifies collaboration
-              and builds meaningful connections in the creative industry.
+              CoreModeling connects talented artists with recruiters in one creative hub. Artists showcase their work, apply for projects, and gain global exposure, while recruiters easily discover and hire the right talent. A user-friendly platform built to simplify collaboration and create meaningful industry connections.
             </p>
           </div>
 
@@ -147,13 +138,6 @@ const HomePage = () => {
 
       <section className="steps-section">
         <h2 className="steps-heading">How Our Platform Works</h2>
-        <p className="steps-subtext">
-          CoreModeling connects artists and recruiters in the creative industry
-          by allowing artists to showcase their talent through profiles, photos,
-          videos, and portfolios, while recruiters access verified professionals
-          to post projects, review applications, and hire the right talent with
-          ease.
-        </p>
         <div className="steps-container">
           {/* Left side - Steps buttons */}
           <div className="steps-list">
@@ -184,17 +168,7 @@ const HomePage = () => {
       <section className="categories-section">
         <h2 className="categories-heading">Browse by Category</h2>
         <p className="categories-subtext">
-          Our platform empowers artists to showcase their talent by registering
-          under diverse categories such as{" "}
-          <strong>
-            models, actors, musicians, writers, filmmakers, and many more
-          </strong>
-          . Each category is designed to highlight unique skill sets, making it
-          easier for recruiters to navigate through a structured pool of
-          professionals. With just a few clicks, recruiters can explore talent
-          across industries, compare portfolios, and connect with the right
-          individuals — ensuring the perfect match for every creative
-          requirement.
+          Our platform lets artists register across diverse creative categories, making their talents easy to discover. Recruiters can quickly browse, compare portfolios, and connect with the right professionals for any creative need.
         </p>
 
         <div className="categories-grid">

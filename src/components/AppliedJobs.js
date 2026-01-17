@@ -32,7 +32,7 @@ const AppliedJobs = () => {
     <>
       <Navbar />
       <div className="applied-jobs-page">
-        <h1 className="applied-title">My Applied Jobs</h1>
+        <h1 className="applied-title">My Applied projects</h1>
 
         <div className="applied-jobs-list">
           {appliedJobs.length > 0 ? (
@@ -48,7 +48,7 @@ const AppliedJobs = () => {
               </div>
             ))
           ) : (
-            <p className="no-applied">You haven’t applied to any jobs yet.</p>
+            <p className="no-applied">You haven’t applied to any projects yet.</p>
           )}
         </div>
 
