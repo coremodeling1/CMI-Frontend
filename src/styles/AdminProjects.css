@@ -15,14 +15,14 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
-  height: 520px; /* fixed height */
+  height: 430px; /* fixed height */
   display: flex;
   flex-direction: column;
 }
 
 /* Make description scrollable */
 .job-card .job-description {
-  max-height: 120px;
+  max-height: 150px;
   overflow-y: auto;
   padding-right: 6px;
   line-height: 1.5;
