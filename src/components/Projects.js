@@ -192,14 +192,14 @@ useEffect(() => {
         {/* ✅ Applied Jobs Button */}
         {/* ✅ Search Filter */}
 
-        <h1 className="projects-title">Available Jobs for Artists</h1>
+        <h1 className="projects-title">Available Projects for Artists</h1>
 
         <div className="applied-jobs-btn-container">
           <button
             className="applied-jobs-btn"
             onClick={() => navigate("/applied-jobs")} // 👈 navigate to AppliedJobs.js
           >
-            Applied Jobs
+            Applied Projects
           </button>
         </div>
         <div className="search-bar">
@@ -252,7 +252,7 @@ useEffect(() => {
               </div>
             ))
           ) : (
-            <p className="no-jobs">No approved jobs available at the moment.</p>
+            <p className="no-jobs">No approved projects available at the moment.</p>
           )}
         </div>
 

@@ -55,7 +55,7 @@ const PostedJobs = () => {
     <>
       <Navbar />
       <div className="posted-jobs-page">
-        <h2>Your Posted Jobs</h2>
+        <h2>Your Posted Projects</h2>
         {jobs.length > 0 ? (
           <div className="job-cards-container">
             {jobs.map((job) => (

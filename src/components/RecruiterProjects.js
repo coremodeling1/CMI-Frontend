@@ -152,7 +152,7 @@ const RecruiterProjects = () => {
 
       {user?.role === "recruiter" && user?.premiumStatus !== "granted" && (
         <p className="premium-warning">
-          🚫 Posting jobs is a premium feature. Please upgrade to continue.
+          🚫 Posting Projects is a premium feature. Please upgrade to continue.
         </p>
       )}
 
@@ -183,13 +183,13 @@ const RecruiterProjects = () => {
                   className="delete-job-btn"
                   onClick={() => handleDelete(job._id)}
                 >
-                  Delete Job
+                  Delete Project
                 </button>
               )}
             </div>
           ))
         ) : (
-          <p>No jobs posted yet.</p>
+          <p>No projects posted yet.</p>
         )}
       </div>
 
@@ -206,14 +206,14 @@ const RecruiterProjects = () => {
           setShowForm(true);
         }}
       >
-        + Create Job
+        + Create Project
       </button>
 
       <button
         className="floating-yourjobs-btn"
         onClick={() => navigate("/posted-jobs")}
       >
-        Your Jobs
+        Your Projects
       </button>
 
       {/* Floating Form Modal */}
@@ -223,10 +223,10 @@ const RecruiterProjects = () => {
             <button className="close-btn" onClick={() => setShowForm(false)}>
               &times;
             </button>
-            <h2 className="heading">Post a Job for Artists</h2>
+            <h2 className="heading">Post a Project for Artists</h2>
             {message && <p className="form-message">{message}</p>}
             <form className="job-form" onSubmit={handleSubmit}>
-              <label>Job Title</label>
+              <label>Project Title</label>
               <input
                 type="text"
                 name="jobTitle"
@@ -235,7 +235,7 @@ const RecruiterProjects = () => {
                 required
               />
 
-              <label>Job Description</label>
+              <label>Project Description</label>
               <textarea
                 name="jobDescription"
                 value={formData.jobDescription}
@@ -296,7 +296,7 @@ const RecruiterProjects = () => {
               />
 
               <button type="submit" className="submit-btn">
-                Post Job
+                Post Project
               </button>
             </form>
           </div>
