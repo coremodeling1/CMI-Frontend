@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useQuill } from "react-quilljs"; // Updated for React 19 compatibility
+import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -20,9 +20,11 @@ const AdminBlogs = () => {
         [{ header: [1, 2, 3, false] }],
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
+        ["link"],
         ["clean"],
       ],
     },
+    placeholder: "Write your blog content here...",
   });
   const [content, setContent] = useState("");
 
@@ -128,62 +130,95 @@ const AdminBlogs = () => {
               className="post-blog-btn"
               onClick={() => setShowForm(!showForm)}
             >
-              {showForm ? "Cancel" : "Post a Blog"}
+              {showForm ? "✕ Cancel" : "+ Create New Blog"}
             </button>
           </div>
 
-          {/* Blog Form */}
+          {/* Blog Form Modal */}
           {showForm && (
-            <form onSubmit={handlePostBlog} className="blog-form">
-              <input
-                type="text"
-                placeholder="Blog Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-                className="blog-input"
-              />
-
-              {/* Rich Text Editor */}
-              <div ref={quillRef} className="blog-editor" />
-
-              <input
-                type="file"
-                accept="image/*,video/*"
-                onChange={(e) => setMedia(e.target.files[0])}
-                className="blog-file"
-              />
-
-              <button
-                type="submit"
-                className="blog-submit-btn"
-                onClick={(e) => handlePostBlog(e)} // ensure onClick works
+            <div className="modal-overlay" onClick={() => setShowForm(false)}>
+              <form 
+                onSubmit={handlePostBlog} 
+                className="blog-form"
+                onClick={(e) => e.stopPropagation()}
               >
-                Post Blog
-              </button>
-            </form>
+                {/* Form Header */}
+                <div className="blog-form-header">
+                  <h2 className="blog-form-title">Create New Blog Post</h2>
+                  <button
+                    type="button"
+                    className="close-form-btn"
+                    onClick={() => setShowForm(false)}
+                    aria-label="Close form"
+                  >
+                    ×
+                  </button>
+                </div>
+
+                {/* Title Input */}
+                <div className="form-group">
+                  <label className="form-label">Blog Title</label>
+                  <input
+                    type="text"
+                    placeholder="Enter an engaging title for your blog"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    className="blog-input"
+                  />
+                </div>
+
+                {/* Rich Text Editor */}
+                <div className="form-group">
+                  <label className="form-label">Blog Content</label>
+                  <div ref={quillRef} className="blog-editor" />
+                </div>
+
+                {/* Media Upload */}
+                <div className="form-group">
+                  <label className="form-label">Featured Image/Video (Optional)</label>
+                  <input
+                    type="file"
+                    accept="image/*,video/*"
+                    onChange={(e) => setMedia(e.target.files[0])}
+                    className="blog-file"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button type="submit" className="blog-submit-btn">
+                  Publish Blog Post
+                </button>
+              </form>
+            </div>
           )}
 
           {/* Sidebar + Content */}
           <div className="blogs-sidebar-container">
             <aside className="blogs-sidebar">
-              <h3 className="sidebar-heading">Blogs</h3>
-              {blogs.map((blog) => (
-                <div
-                  key={blog._id}
-                  className={`blog-title-item ${
-                    selectedBlog?._id === blog._id ? "active" : ""
-                  }`}
-                  onClick={() => setSelectedBlog(blog)}
-                >
-                  {blog.title}
-                </div>
-              ))}
+              <h3 className="sidebar-heading">All Blogs</h3>
+              {blogs.length === 0 ? (
+                <p style={{ textAlign: "center", color: "#666", padding: "20px" }}>
+                  No blogs yet. Create your first blog!
+                </p>
+              ) : (
+                blogs.map((blog) => (
+                  <div
+                    key={blog._id}
+                    className={`blog-title-item ${
+                      selectedBlog?._id === blog._id ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedBlog(blog)}
+                  >
+                    {blog.title}
+                  </div>
+                ))
+              )}
             </aside>
 
             {/* Selected Blog */}
             <div className="blogs-content">
-              {selectedBlog && (
+              {selectedBlog ? (
                 <article className="selected-blog">
                   <h1 className="blog-title">{selectedBlog.title}</h1>
 
@@ -210,9 +245,14 @@ const AdminBlogs = () => {
                     className="delete-blog-btn"
                     onClick={() => handleDeleteBlog(selectedBlog._id)}
                   >
-                    Delete Blog
+                    🗑 Delete Blog
                   </button>
                 </article>
+              ) : (
+                <div style={{ textAlign: "center", padding: "100px 20px", color: "#fff" }}>
+                  <h2>No Blog Selected</h2>
+                  <p>Select a blog from the sidebar or create a new one</p>
+                </div>
               )}
             </div>
           </div>
