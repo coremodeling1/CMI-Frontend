@@ -10,7 +10,7 @@ import about3 from "../images/about3.jpg";
 import Signup from "./Signup";
 import logo from "../images/logo.png";
 import "../styles/responsive.css";
-import Footer from "./Footer"; // ✅ Import Footer
+import Footer from "./Footer";
 import applyProject from "../images/apply-project.jpeg";
 import artist from "../images/artist.jpeg";
 import gallery from "../images/gallery.jpeg";
@@ -20,7 +20,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const [signupRole, setSignupRole] = useState("artist"); // default
+  const [signupRole, setSignupRole] = useState("artist");
+  const [selectedCategory, setSelectedCategory] = useState(""); // ✅ NEW STATE
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(false);
   const [instagramPosts, setInstagramPosts] = useState([]);
@@ -66,6 +67,13 @@ const Login = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // ✅ NEW FUNCTION: Handle category click
+  const handleCategoryClick = (categoryName) => {
+    setSignupRole("artist");
+    setSelectedCategory(categoryName.toLowerCase());
+    setShowSignup(true);
+  };
+
   // Input change
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -97,7 +105,6 @@ const Login = () => {
 
   useEffect(() => {
     const accessToken = process.env.REACT_APP_IG_ACCESS_TOKEN;
-    // const userId = process.env.REACT_APP_IG_USER_ID;
 
     async function fetchInstagramFeed() {
       try {
@@ -158,6 +165,7 @@ const Login = () => {
           <button
             onClick={() => {
               setSignupRole("artist");
+              setSelectedCategory(""); // Reset category
               setShowSignup(true);
             }}
             className="explore-btn"
@@ -172,6 +180,7 @@ const Login = () => {
             className="feature-card"
             onClick={() => {
               setSignupRole("artist");
+              setSelectedCategory(""); // Reset category
               setShowSignup(true);
             }}
             style={{ cursor: "pointer" }}
@@ -186,6 +195,7 @@ const Login = () => {
             className="feature-card"
             onClick={() => {
               setSignupRole("recruiter");
+              setSelectedCategory(""); // Reset category
               setShowSignup(true);
             }}
             style={{ cursor: "pointer" }}
@@ -208,7 +218,7 @@ const Login = () => {
             <p className="intro">Welcome to CoreModelling</p>
             <h2 className="title">Connecting Artists & Recruiters</h2>
             <p className="description">
-             CoreModelling connects talented artists with recruiters in one creative hub. Artists showcase their work, apply for projects, and gain global exposure, while recruiters easily discover and hire the right talent. A user-friendly platform built to simplify collaboration and create meaningful industry connections.
+              CoreModelling connects talented artists with recruiters in one creative hub. Artists showcase their work, apply for projects, and gain global exposure, while recruiters easily discover and hire the right talent. A user-friendly platform built to simplify collaboration and create meaningful industry connections.
             </p>
           </div>
 
@@ -263,7 +273,7 @@ const Login = () => {
       <section className="categories-section">
         <h2 className="categories-heading">Browse by Category</h2>
         <p className="categories-subtext">
-         Our platform lets artists register across diverse creative categories, making their talents easy to discover. Recruiters can quickly browse, compare portfolios, and connect with the right professionals for any creative need.
+          Our platform lets artists register across diverse creative categories, making their talents easy to discover. Recruiters can quickly browse, compare portfolios, and connect with the right professionals for any creative need.
         </p>
 
         <div className="categories-grid">
@@ -286,7 +296,8 @@ const Login = () => {
             <div
               key={index}
               className="category-card"
-              style={{ backgroundImage: `url(${cat.img})` }}
+              style={{ backgroundImage: `url(${cat.img})`, cursor: "pointer" }}
+              onClick={() => handleCategoryClick(cat.name)} // ✅ ADDED CLICK HANDLER
             >
               <div className="category-overlay">
                 <h3>{cat.name}</h3>
@@ -310,7 +321,7 @@ const Login = () => {
               <h3 className="faq-title">For Artists</h3>
 
               <details>
-                <summary>I’m a fresher, how can I start?</summary>
+                <summary>I'm a fresher, how can I start?</summary>
                 <p>
                   Freshers can start by creating a complete profile, selecting
                   the right category, and uploading photos, videos, or
@@ -419,7 +430,7 @@ const Login = () => {
               <details>
                 <summary>How can I contact CoreModelling?</summary>
                 <p>
-                  Email: coremodeling1@gmail.com <br />
+                  Email: [coremodeling1@gmail.com](mailto:coremodeling1@gmail.com) <br />
                   Phone: +91 090045 00657 <br />
                   Address: 1st Floor Office No-02 Seasons Harmony Nr Ayush Nx,
                   Kalyan West, Maharashtra 421301
@@ -456,7 +467,6 @@ const Login = () => {
         </div>
       </section>
 
-      {/* ✅ Footer OUTSIDE slideshow */}
       <Footer />
 
       {/* Floating Login Modal */}
@@ -492,7 +502,7 @@ const Login = () => {
               }}
               style={{ cursor: "pointer" }}
             >
-              Don’t have an account? Signup here
+              Don't have an account? Signup here
             </p>
           </div>
         </div>
@@ -502,7 +512,7 @@ const Login = () => {
       {showSignup && (
         <div className="modal-overlay" onClick={() => setShowSignup(false)}>
           <div className="container" onClick={(e) => e.stopPropagation()}>
-            <Signup role={signupRole} />
+            <Signup role={signupRole} preSelectedCategory={selectedCategory} /> {/* ✅ PASS CATEGORY */}
           </div>
         </div>
       )}

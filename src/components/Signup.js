@@ -3,9 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
 
-const Signup = ({ role: initialRole = "artist" }) => {
+const Signup = ({ role: initialRole = "artist", preSelectedCategory = "" }) => { // ✅ ACCEPT PROP
   const [role, setRole] = useState(initialRole);
-  const [identity, setIdentity] = useState("");
+  const [identity, setIdentity] = useState(preSelectedCategory); // ✅ SET INITIAL VALUE
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,8 +20,6 @@ const Signup = ({ role: initialRole = "artist" }) => {
     language: "",
     instagram: "",
     instagramFollowers: "",
-
-    // 🔽 ADD THESE
     willingToTravel: "",
     experience: "",
     internationalProjects: "",
@@ -49,6 +47,34 @@ const Signup = ({ role: initialRole = "artist" }) => {
   useEffect(() => {
     setRole(initialRole);
   }, [initialRole]);
+
+  // ✅ UPDATE IDENTITY WHEN PRE-SELECTED CATEGORY CHANGES
+  useEffect(() => {
+    if (preSelectedCategory) {
+      // Convert category name to match option values
+      const categoryMap = {
+        "model": "model",
+        "actor": "actor",
+        "influencer": "influencer",
+        "writer": "writer",
+        "stylist": "stylist",
+        "photographer": "photographer",
+        "advertising professional": "advertisingProfessional",
+        "singer": "singer",
+        "musician": "musician",
+        "dancer": "dancer",
+        "anchor": "anchor",
+        "voice-over artist": "voice-over artist",
+        "filmmaker": "filmmaker",
+        "standup comedian": "standup-comedian"
+      };
+      
+      const mappedCategory = categoryMap[preSelectedCategory.toLowerCase()];
+      if (mappedCategory) {
+        setIdentity(mappedCategory);
+      }
+    }
+  }, [preSelectedCategory]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,8 +124,8 @@ const Signup = ({ role: initialRole = "artist" }) => {
         state: "",
         country: "",
         language: "",
-        instagram: "", // ✅ reset instagram
-        instagramFollowers: "", // ✅ reset followers count
+        instagram: "",
+        instagramFollowers: "",
         willingToTravel: "",
         experience: "",
         internationalProjects: "",
@@ -308,7 +334,6 @@ const Signup = ({ role: initialRole = "artist" }) => {
                     required
                   />
 
-                  {/* ✅ Instagram field */}
                   <input
                     type="url"
                     name="instagram"
@@ -316,7 +341,6 @@ const Signup = ({ role: initialRole = "artist" }) => {
                     value={formData.instagram}
                     onChange={handleChange}
                   />
-                  {/* ✅ Instagram Followers Count field */}
                   <input
                     type="text"
                     name="instagramFollowers"
