@@ -38,7 +38,7 @@ const BuyPremium = () => {
   <div className="contact-box">
     <p>
        To upgrade to Premium, kindly send us an email at: <br />
-      <a href="mailto:coremodeling.premium@gmail.com">
+      <a href="mailto:coremodeling1@gmail.com">
         coremodeling1@gmail.com
       </a>
     </p>

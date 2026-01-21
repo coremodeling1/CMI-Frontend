@@ -21,7 +21,7 @@ const HomePage = () => {
     {
       img: step1,
       title: "Sign Up & Login",
-      desc: "Both Recruiters and Artists can create an account and log in to start using CoreModeling.",
+      desc: "Both Recruiters and Artists can create an account and log in to start using CoreModelling.",
     },
     {
       img: artist,
@@ -78,7 +78,7 @@ const HomePage = () => {
       <div className="homepage-hero-section">
         <header className="homepage-hero">
           <h1>
-            Welcome to <span>CoreModeling</span>
+            Welcome to <span>CoreModelling</span>
           </h1>
           <p className="homepage-subtext">Where Talent Meets Spotlight</p>
           <p>
@@ -110,17 +110,17 @@ const HomePage = () => {
         <div className="about-container">
           {/* Left Side - Text */}
           <div className="about-text fade-in-up delay-1">
-            <p className="intro">Welcome to CoreModeling</p>
+            <p className="intro">Welcome to CoreModelling</p>
             <h2 className="title">Connecting Artists & Recruiters</h2>
             <p className="description">
-              CoreModeling connects talented artists with recruiters in one creative hub. Artists showcase their work, apply for projects, and gain global exposure, while recruiters easily discover and hire the right talent. A user-friendly platform built to simplify collaboration and create meaningful industry connections.
+              CoreModelling connects talented artists with recruiters in one creative hub. Artists showcase their work, apply for projects, and gain global exposure, while recruiters easily discover and hire the right talent. A user-friendly platform built to simplify collaboration and create meaningful industry connections.
             </p>
           </div>
 
           {/* Right Side - Images */}
           <div className="about-images slide-in-left delay-2">
             <div className="main-image">
-              <img src={about3} alt="CoreModeling Showcase" />
+              <img src={about3} alt="CoreModelling Showcase" />
 
               {/* Left Overlay Image */}
               <div className="overlay-image overlay-left slide-in-left delay-3">
@@ -205,7 +205,7 @@ const HomePage = () => {
         <div className="faq-wrapper">
           <h2 className="faq-heading">Frequently Asked Questions</h2>
           <p className="faq-subtext">
-            Everything you need to know about using CoreModeling as an Artist or
+            Everything you need to know about using CoreModelling as an Artist or
             Recruiter
           </p>
 
@@ -230,7 +230,7 @@ const HomePage = () => {
                 </summary>
                 <p>
                   Your profile will be visible only after it is reviewed and
-                  approved by the CoreModeling team. Pending or rejected
+                  approved by the CoreModelling team. Pending or rejected
                   profiles are not shown to recruiters.
                 </p>
               </details>
@@ -260,7 +260,7 @@ const HomePage = () => {
                   Do you charge any registration or onboarding fees?
                 </summary>
                 <p>
-                  No. Artist registration and onboarding on CoreModeling are
+                  No. Artist registration and onboarding on CoreModelling are
                   completely free.
                 </p>
               </details>
@@ -268,7 +268,7 @@ const HomePage = () => {
               <details>
                 <summary>Do you guarantee work or roles?</summary>
                 <p>
-                  CoreModeling provides opportunities and visibility, but final
+                  CoreModelling provides opportunities and visibility, but final
                   selection depends entirely on recruiters and project
                   requirements.
                 </p>
@@ -283,7 +283,7 @@ const HomePage = () => {
                 <summary>Is posting a project free?</summary>
                 <p>
                   No. Recruiters must have a Premium membership to post projects
-                  on CoreModeling.
+                  on CoreModelling.
                 </p>
               </details>
 
@@ -322,7 +322,7 @@ const HomePage = () => {
               </details>
 
               <details>
-                <summary>How can I contact CoreModeling?</summary>
+                <summary>How can I contact CoreModelling?</summary>
                 <p>
                   Email: coremodeling1@gmail.com <br />
                   Phone: +91 090045 00657 <br />

@@ -148,7 +148,7 @@ const Signup = ({ role: initialRole = "artist" }) => {
         </div>
       ) : (
         <div className="signup-container">
-          <h2>Signup - CoreModeling</h2>
+          <h2>Signup - CoreModelling</h2>
           <div className="form-scroll">
             <form onSubmit={handleSubmit}>
               <select value={role} onChange={(e) => setRole(e.target.value)}>

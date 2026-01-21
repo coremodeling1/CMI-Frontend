@@ -41,10 +41,10 @@ const Footer = () => {
         <div className="footer-section">
           <img 
             src={require("../images/logo.png")}  // ✅ your logo path
-            alt="CoreModeling Logo" 
+            alt="CoreModelling Logo" 
             className="footer-logo"
           />
-          <h3>CoreModeling</h3>
+          <h3>CoreModelling</h3>
           <p>
             Connecting talent with opportunities worldwide. Empowering artists and recruiters with seamless collaboration. 
           </p>
@@ -140,7 +140,7 @@ const Footer = () => {
 
       {/* Bottom strip */}
       <p className="footer-bottom">
-        © 2025 CoreModeling. All Rights Reserved. 
+        © 2025 CoreModelling. All Rights Reserved. 
       </p>
     </footer>
   );

@@ -45,7 +45,7 @@ return (
   <nav className="navbar">
     <div className="logo">
       <a href="/home">
-        <img src={logo} alt="CoreModeling Logo" className="navbar-logo" />
+        <img src={logo} alt="CoreModelling Logo" className="navbar-logo" />
       </a>
     </div>
 {/* ✅ Show Premium button depending on premiumStatus */}
