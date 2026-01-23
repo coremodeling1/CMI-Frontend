@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/AppliedJobs.css";
@@ -10,37 +10,44 @@ const AppliedJobs = () => {
   const [loading, setLoading] = useState(true);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
-  // ✅ Simple fetch - only applied jobs with job details
-  const fetchAppliedJobs = useCallback(async () => {
-    if (!loggedInUser) {
+  // ✅ SIMPLIFIED - No useCallback dependency hell
+  const fetchAppliedJobs = async () => {
+    if (!loggedInUser?. _id) {
       setLoading(false);
+      setAppliedJobs([]);
       return;
     }
 
     try {
       setLoading(true);
-      const res = await fetch(`${backendURL}/api/applications/user/${loggedInUser._id}`);
-      if (!res.ok) throw new Error('Failed to fetch');
+      const response = await fetch(
+        `${backendURL}/api/applications/user/${loggedInUser._id}`
+      );
       
-      const data = await res.json();
+      if (!response.ok) {
+        throw new Error('Failed to fetch applications');
+      }
+
+      const data = await response.json();
       
-      // ✅ Filter only applications with valid job data
-      const validApplications = Array.isArray(data) 
-        ? data.filter(app => app.job && app.job._id)
+      // ✅ Filter only valid applications with job data
+      const validApplications = Array.isArray(data)
+        ? data.filter(app => app.job && app.job._id && app.job.jobTitle)
         : [];
         
       setAppliedJobs(validApplications);
-    } catch (err) {
-      console.error("Error fetching applied jobs:", err);
+    } catch (error) {
+      console.error("Error fetching applied jobs:", error);
       setAppliedJobs([]);
     } finally {
-      setLoading(false);
+      setLoading(false); // ✅ ALWAYS set loading false
     }
-  }, [loggedInUser]);
+  };
 
+  // ✅ SIMPLE useEffect - no dependency issues
   useEffect(() => {
     fetchAppliedJobs();
-  }, [fetchAppliedJobs]);
+  }, []); // ✅ Empty dependency array - runs once
 
   return (
     <>
@@ -58,34 +65,34 @@ const AppliedJobs = () => {
             appliedJobs.map((application) => (
               <div className="applied-card" key={application._id}>
                 <div className="card-header">
-                  <h3 className="job-title">{application.job?.jobTitle || "Untitled Project"}</h3>
+                  <h3 className="job-title">{application.job.jobTitle}</h3>
                   <span className="status-badge active">✅ Applied</span>
                 </div>
 
                 <div className="job-description-scroll">
-                  <p>{application.job?.jobDescription || "No description available"}</p>
+                  <p>{application.job.jobDescription || "No description available"}</p>
                 </div>
 
                 <div className="job-meta">
                   <div className="meta-item">
                     <span className="meta-icon">🎨</span>
                     <span className="meta-label">Role:</span>
-                    <span className="meta-value">{application.job?.requiredArtist || "N/A"}</span>
+                    <span className="meta-value">{application.job.requiredArtist}</span>
                   </div>
                   <div className="meta-item">
                     <span className="meta-icon">👤</span>
                     <span className="meta-label">Recruiter:</span>
-                    <span className="meta-value">{application.job?.recruiterName || "N/A"}</span>
+                    <span className="meta-value">{application.job.recruiterName}</span>
                   </div>
                   <div className="meta-item">
                     <span className="meta-icon">📧</span>
                     <span className="meta-label">Email:</span>
-                    <span className="meta-value">{application.job?.contactEmail || "N/A"}</span>
+                    <span className="meta-value">{application.job.contactEmail}</span>
                   </div>
                   <div className="meta-item">
                     <span className="meta-icon">📍</span>
                     <span className="meta-label">Location:</span>
-                    <span className="meta-value">{application.job?.address || "Remote"}</span>
+                    <span className="meta-value">{application.job.address || "Remote"}</span>
                   </div>
                 </div>
 
