@@ -97,22 +97,24 @@ const RecruiterProjects = () => {
     }
   };
 
-  const handleDelete = async (jobId) => {
-    if (!confirm("Are you sure you want to delete this job?")) return;
-    
-    try {
-      setJobs(jobs.filter((job) => job._id !== jobId));
-      await fetch(`${backendURL}/api/jobs/${jobId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${user?.token}` },
-      });
-      setMessage("✅ Job deleted successfully!");
-    } catch (err) {
-      console.error("Error deleting job:", err);
-      setMessage("❌ Failed to delete job");
-      fetchJobs();
-    }
-  };
+const handleDelete = async (jobId) => {
+  // ✅ FIXED - Use window.confirm()
+  if (!window.confirm("Are you sure you want to delete this job?")) return;
+  
+  try {
+    setJobs(jobs.filter((job) => job._id !== jobId));
+    await fetch(`${backendURL}/api/jobs/${jobId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${user?.token}` },
+    });
+    setMessage("✅ Job deleted successfully!");
+  } catch (err) {
+    console.error("Error deleting job:", err);
+    setMessage("❌ Failed to delete job");
+    fetchJobs();
+  }
+};
+
 
   const filteredJobs = jobs.filter(
     (job) =>
