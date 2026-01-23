@@ -22,7 +22,7 @@ const AdminArtistsPage = () => {
     "writer",
     "stylist",
     "photographer",
-    "advertising professional",
+    "advertisingProfessional",
     "singer",
     "musician",
     "dancer",

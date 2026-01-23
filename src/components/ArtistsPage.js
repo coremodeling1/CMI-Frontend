@@ -22,7 +22,7 @@ const ArtistsPage = () => {
     "writer",
     "stylist",
     "photographer",
-    "advertising professional",
+    "advertisingProfessional",
     "singer",
     "musician",
     "dancer",
@@ -361,7 +361,7 @@ const ArtistsPage = () => {
                 {/* If not premium, show upgrade msg */}
                 {user?.premiumStatus !== "granted" && (
                   <p className="premium-msg">
-                    ✨ Buy Premium to unlock full access ✨
+                     Only premium recruiter can view full details
                   </p>
                 )}
               </div>
