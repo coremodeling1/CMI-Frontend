@@ -7,32 +7,32 @@ const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const AppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const [jobs, setJobs] = useState([]); // ✅ New state for job verification
+  const [jobs, setJobs] = useState([]); 
   const [loading, setLoading] = useState(true);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
-  // ✅ Fetch applied jobs for logged-in user
   const fetchAppliedJobs = useCallback(async () => {
     if (!loggedInUser) return;
 
     try {
       const res = await fetch(`${backendURL}/api/applications/user/${loggedInUser._id}`);
       const data = await res.json();
-      setAppliedJobs(data);
+      setAppliedJobs(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error fetching applied jobs:", err);
+      setAppliedJobs([]);
     }
   }, [loggedInUser]);
 
-  // ✅ Fetch all jobs to verify if they still exist
   const fetchJobs = useCallback(async () => {
     try {
       const res = await fetch(`${backendURL}/api/jobs`);
       const data = await res.json();
-      setJobs(data);
-      setLoading(false);
+      setJobs(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error fetching jobs:", err);
+      setJobs([]);
+    } finally {
       setLoading(false);
     }
   }, []);
@@ -42,10 +42,10 @@ const AppliedJobs = () => {
     fetchAppliedJobs();
   }, [fetchAppliedJobs, fetchJobs]);
 
-  // ✅ Filter out deleted jobs
+  // ✅ FIXED - Safe filtering with Array.isArray checks
   const validAppliedJobs = appliedJobs.filter((application) => {
-    if (!application.job) return false;
-    return jobs.some((job) => job._id === application.job._id);
+    if (!application?.job || !Array.isArray(jobs)) return false;
+    return jobs.some((job) => job && job._id === application.job._id);
   });
 
   return (
@@ -61,7 +61,7 @@ const AppliedJobs = () => {
           </div>
           <div className="stat-card expired">
             <span className="stat-number">{appliedJobs.length - validAppliedJobs.length}</span>
-            <span className="stat-label">Expired (Job Deleted)</span>
+            <span className="stat-label">Expired</span>
           </div>
         </div>
 
