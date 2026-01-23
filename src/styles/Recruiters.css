@@ -110,7 +110,7 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 400px;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -343,6 +343,7 @@
 
   .recruiter-card {
     padding: 30px 20px 20px;
+    width: 300px;
   }
 }
 

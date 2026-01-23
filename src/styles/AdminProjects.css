@@ -1,120 +1,405 @@
-.jobs-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  padding: 20px;
-  justify-content: flex-start; /* start from left */
-  margin-bottom: 214px;
+/* ===============================
+   ADMIN PROJECTS - PERFECT UI 2026
+================================ */
+.admin-projects-page {
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
 }
 
+/* Page Title */
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  padding: 60px 30px 30px;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+/* ===============================
+   FILTER SECTION
+================================ */
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 40px;
+  padding: 0 30px;
+  max-width: 1400px;
+}
+
+.filters select {
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 360px;
+  text-align: left;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 20px;
+  padding-right: 50px;
+}
+
+.filters select:hover {
+  background: linear-gradient(145deg, #252525, #151515);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.filters select:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* ===============================
+   JOBS GRID
+================================ */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 30px;
+  padding: 0 30px 60px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   JOB CARD - PERFECTLY CONTAINED
+================================ */
 .job-card {
   background: linear-gradient(145deg, #fefefe, #e0e0e0);
-  border-radius: 15px;
-  padding: 25px;
-  width: 320px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  height: 430px; /* fixed height */
+  overflow: hidden;
+  height: auto;
+  min-height: 420px;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* Make description scrollable */
-.job-card .job-description {
-  max-height: 150px;
-  overflow-y: auto;
-  padding-right: 6px;
-  line-height: 1.5;
-}
-
-/* Optional: clean scrollbar */
-.job-card .job-description::-webkit-scrollbar {
-  width: 4px;
-}
-.job-card .job-description::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 4px;
+.job-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #000000, #d12424, #000000);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .job-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.job-card h3 {
-  font-size: 1.4rem;
-  color: #222;
-  margin-bottom: 12px;
-  border-bottom: 2px solid #d12424;
-  padding-bottom: 5px;
+.job-card:hover::before {
+  opacity: 1;
 }
 
-.job-card p {
-  font-size: 0.95rem;
-  color: #444;
-  margin: 5px 0;
-}
-
-.status-buttons {
-  margin-top: 15px;
+/* Job Header */
+.job-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(209, 36, 36, 0.2);
+}
+
+.job-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222222;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge.pending {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+}
+
+.status-badge.approved {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+}
+
+.status-badge.rejected {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+}
+
+/* Description Section */
+.job-description-scroll {
+  flex: 1;
+  max-height: 160px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 8px;
+}
+
+.job-description-scroll p {
+  font-size: 14px;
+  color: #444444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.job-description-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.job-description-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.job-description-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #cccccc, #999999);
+  border-radius: 10px;
+}
+
+/* Job Details */
+.job-details {
+  margin-bottom: 25px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #222222;
+  font-size: 13px;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-size: 13px;
+  color: #444444;
+  flex: 1;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+/* Status Buttons */
+.status-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
 }
 
 .approve-btn,
 .reject-btn {
-  padding: 8px 15px;
-  border-radius: 6px;
-  border: none;
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid transparent;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s, transform 0.2s;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .approve-btn {
-  background-color: #ffffff;
-  color: #000000;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .approve-btn:hover {
-  background-color: white;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #34d399, #10b981);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
 .reject-btn {
-  background-color: #dc3545;
-  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .reject-btn:hover {
-  background-color: #c82333;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
 }
 
-.status-label {
-  margin-top: 10px;
-  font-weight: bold;
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.status-label.approved {
-  color: #060606;
+.empty-state p {
+  font-size: 18px;
+  margin: 0;
 }
 
-.status-label.rejected {
-  color: #dc3545;
+/* ===============================
+   PERFECT RESPONSIVE DESIGN
+================================ */
+@media (max-width: 1200px) {
+  .jobs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+  }
 }
 
-.page-title {
-  text-align: center; /* centers the text horizontally */
-  font-size: 2rem; /* increase font size */
-  font-weight: 700; /* make it bold */
-  color: #ffffff; /* top and bottom spacing */
-  letter-spacing: 1px; /* optional spacing for style */
-  background-color: #000000;
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  padding: 20px;
-  margin-top: 0px;
+@media (max-width: 992px) {
+  .jobs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 0 20px 40px;
+  }
 }
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2.2rem;
+    padding: 40px 20px 20px;
+  }
+
+  .filters {
+    padding: 0 20px;
+  }
+
+  .filters select {
+    max-width: 100%;
+  }
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px 40px;
+  }
+
+  .job-card {
+    min-height: auto;
+    padding: 25px;
+  }
+
+  .job-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .status-buttons {
+    flex-direction: column;
+  }
+
+  .approve-btn,
+  .reject-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.8rem;
+    padding: 30px 15px 15px;
+  }
+
+  .jobs-grid {
+    padding: 0 15px 30px;
+  }
+
+  .job-card {
+    padding: 20px;
+  }
+
+  .job-title {
+    font-size: 1.2rem;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .detail-label {
+    min-width: auto;
+  }
+}
+
+/* Staggered Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.job-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.job-card:nth-child(1) { animation-delay: 0.1s; }
+.job-card:nth-child(2) { animation-delay: 0.2s; }
+.job-card:nth-child(3) { animation-delay: 0.3s; }
+.job-card:nth-child(4) { animation-delay: 0.4s; }
+.job-card:nth-child(5) { animation-delay: 0.5s; }
+.job-card:nth-child(6) { animation-delay: 0.6s; }
