@@ -1,5 +1,5 @@
 // src/pages/AppliedJobs.js
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/AppliedJobs.css";
@@ -10,22 +10,22 @@ const AppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
-  // ✅ Fixed whitespace - removed space before ._id
-  const fetchAppliedJobs = useCallback(async () => {
+  // ✅ Solution 2: Simple function, no useCallback issues
+  const fetchAppliedJobs = async () => {
     if (!loggedInUser) return;
 
     try {
       const res = await fetch(`${backendURL}/api/applications/user/${loggedInUser._id}`);
       const data = await res.json();
-      setAppliedJobs(data); // data should include job details populated from backend
+      setAppliedJobs(data);
     } catch (err) {
       console.error("Error fetching applied jobs:", err);
     }
-  }, [loggedInUser._id]); // ✅ Fixed: Specific dependency instead of object
+  };
 
   useEffect(() => {
     fetchAppliedJobs();
-  }, [fetchAppliedJobs]); // ✅ ESLint happy - fetchAppliedJobs is stable
+  }, []); // ✅ Empty array - runs once on mount
 
   return (
     <>
