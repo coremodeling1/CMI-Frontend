@@ -7,46 +7,40 @@ const backendURL = "https://cmi-backend-6xf1.onrender.com";
 
 const AppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const [jobs, setJobs] = useState([]); 
   const [loading, setLoading] = useState(true);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
+  // ✅ Simple fetch - only applied jobs with job details
   const fetchAppliedJobs = useCallback(async () => {
-    if (!loggedInUser) return;
+    if (!loggedInUser) {
+      setLoading(false);
+      return;
+    }
 
     try {
+      setLoading(true);
       const res = await fetch(`${backendURL}/api/applications/user/${loggedInUser._id}`);
+      if (!res.ok) throw new Error('Failed to fetch');
+      
       const data = await res.json();
-      setAppliedJobs(Array.isArray(data) ? data : []);
+      
+      // ✅ Filter only applications with valid job data
+      const validApplications = Array.isArray(data) 
+        ? data.filter(app => app.job && app.job._id)
+        : [];
+        
+      setAppliedJobs(validApplications);
     } catch (err) {
       console.error("Error fetching applied jobs:", err);
       setAppliedJobs([]);
-    }
-  }, [loggedInUser]);
-
-  const fetchJobs = useCallback(async () => {
-    try {
-      const res = await fetch(`${backendURL}/api/jobs`);
-      const data = await res.json();
-      setJobs(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error("Error fetching jobs:", err);
-      setJobs([]);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [loggedInUser]);
 
   useEffect(() => {
-    fetchJobs();
     fetchAppliedJobs();
-  }, [fetchAppliedJobs, fetchJobs]);
-
-  // ✅ FIXED - Safe filtering with Array.isArray checks
-  const validAppliedJobs = appliedJobs.filter((application) => {
-    if (!application?.job || !Array.isArray(jobs)) return false;
-    return jobs.some((job) => job && job._id === application.job._id);
-  });
+  }, [fetchAppliedJobs]);
 
   return (
     <>
@@ -54,29 +48,18 @@ const AppliedJobs = () => {
       <div className="applied-jobs-page">
         <h1 className="applied-title">My Applied Projects</h1>
 
-        <div className="applied-stats">
-          <div className="stat-card">
-            <span className="stat-number">{validAppliedJobs.length}</span>
-            <span className="stat-label">Active Applications</span>
-          </div>
-          <div className="stat-card expired">
-            <span className="stat-number">{appliedJobs.length - validAppliedJobs.length}</span>
-            <span className="stat-label">Expired</span>
-          </div>
-        </div>
-
         <div className="applied-jobs-grid">
           {loading ? (
             <div className="loading-state">
               <div className="spinner"></div>
               <p>Loading your applications...</p>
             </div>
-          ) : validAppliedJobs.length > 0 ? (
-            validAppliedJobs.map((application) => (
+          ) : appliedJobs.length > 0 ? (
+            appliedJobs.map((application) => (
               <div className="applied-card" key={application._id}>
                 <div className="card-header">
                   <h3 className="job-title">{application.job?.jobTitle || "Untitled Project"}</h3>
-                  <span className="status-badge active">Active</span>
+                  <span className="status-badge active">✅ Applied</span>
                 </div>
 
                 <div className="job-description-scroll">
@@ -86,7 +69,7 @@ const AppliedJobs = () => {
                 <div className="job-meta">
                   <div className="meta-item">
                     <span className="meta-icon">🎨</span>
-                    <span className="meta-label">Artist Role:</span>
+                    <span className="meta-label">Role:</span>
                     <span className="meta-value">{application.job?.requiredArtist || "N/A"}</span>
                   </div>
                   <div className="meta-item">
@@ -96,11 +79,8 @@ const AppliedJobs = () => {
                   </div>
                   <div className="meta-item">
                     <span className="meta-icon">📧</span>
-                    <span className="meta-label">Contact:</span>
-                    <span className="meta-value">
-                      {application.job?.contactEmail || "N/A"} 
-                      {application.job?.contactPhone && ` • ${application.job.contactPhone}`}
-                    </span>
+                    <span className="meta-label">Email:</span>
+                    <span className="meta-value">{application.job?.contactEmail || "N/A"}</span>
                   </div>
                   <div className="meta-item">
                     <span className="meta-icon">📍</span>
@@ -110,16 +90,16 @@ const AppliedJobs = () => {
                 </div>
 
                 <div className="application-date">
-                  <span>Applied: {new Date(application.createdAt).toLocaleDateString()}</span>
+                  <span>Applied: {new Date(application.createdAt).toLocaleDateString('en-IN')}</span>
                 </div>
               </div>
             ))
           ) : (
             <div className="empty-state">
               <div className="empty-icon">📭</div>
-              <p>You haven't applied to any active projects yet.</p>
+              <p>No applications found</p>
               <p className="empty-subtitle">
-                Find amazing opportunities on the <a href="/projects">Projects page</a>!
+                Apply to projects on the <a href="/projects">Projects page</a>
               </p>
             </div>
           )}
