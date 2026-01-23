@@ -13,6 +13,9 @@ const AdminBlogs = () => {
   const [title, setTitle] = useState("");
   const [media, setMedia] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false); // ✅ NEW: Edit mode state
+  const [editingBlogId, setEditingBlogId] = useState(null); // ✅ NEW: Track editing blog
+  
   const { quill, quillRef } = useQuill({
     theme: "snow",
     modules: {
@@ -55,8 +58,36 @@ const AdminBlogs = () => {
     };
   }, [quill]);
 
-  // Post a new blog
-  const handlePostBlog = async (e) => {
+  // ✅ NEW: Pre-fill form when editing [web:21][web:25]
+  useEffect(() => {
+    if (quill && isEditMode && selectedBlog) {
+      // Use dangerouslyPasteHTML to set initial content
+      quill.clipboard.dangerouslyPasteHTML(selectedBlog.content);
+      setContent(selectedBlog.content);
+    }
+  }, [quill, isEditMode, selectedBlog]);
+
+  // ✅ NEW: Handle Edit Button Click
+  const handleEditBlog = () => {
+    if (!selectedBlog) return;
+    
+    setIsEditMode(true);
+    setEditingBlogId(selectedBlog._id);
+    setTitle(selectedBlog.title);
+    setContent(selectedBlog.content);
+    setMedia(null); // Reset media (user can upload new one)
+    setShowForm(true);
+    
+    // Wait for quill to be ready, then set content
+    setTimeout(() => {
+      if (quill) {
+        quill.clipboard.dangerouslyPasteHTML(selectedBlog.content);
+      }
+    }, 100);
+  };
+
+  // ✅ UPDATED: Handle form submission (Create or Update)
+  const handleSubmitBlog = async (e) => {
     e.preventDefault();
     if (!title || !content) return alert("Please fill all fields");
 
@@ -70,30 +101,70 @@ const AdminBlogs = () => {
     if (!token) return alert("You must be logged in as admin");
 
     try {
-      const res = await axios.post(
-        "https://cmi-backend-6xf1.onrender.com/api/blogs",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      let res;
+      
+      if (isEditMode) {
+        // ✅ UPDATE existing blog
+        res = await axios.put(
+          `https://cmi-backend-6xf1.onrender.com/api/blogs/${editingBlogId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        
+        // Update blogs list
+        const updatedBlogs = blogs.map((blog) =>
+          blog._id === editingBlogId ? res.data : blog
+        );
+        setBlogs(updatedBlogs);
+        setSelectedBlog(res.data);
+        alert("Blog updated successfully!");
+      } else {
+        // ✅ CREATE new blog
+        res = await axios.post(
+          "https://cmi-backend-6xf1.onrender.com/api/blogs",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        
+        setBlogs([res.data, ...blogs]);
+        setSelectedBlog(res.data);
+        alert("Blog created successfully!");
+      }
 
-      setBlogs([res.data, ...blogs]);
-      setSelectedBlog(res.data);
-      setTitle("");
-      setContent("");
-      setMedia(null);
-      setShowForm(false);
-
-      // Clear editor content
-      if (quill) quill.setContents([]);
+      // Reset form
+      resetForm();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Error posting blog");
+      alert(err.response?.data?.message || "Error saving blog");
     }
+  };
+
+  // ✅ NEW: Reset form function
+  const resetForm = () => {
+    setTitle("");
+    setContent("");
+    setMedia(null);
+    setShowForm(false);
+    setIsEditMode(false);
+    setEditingBlogId(null);
+    
+    // Clear editor content
+    if (quill) quill.setContents([]);
+  };
+
+  // ✅ NEW: Handle Cancel
+  const handleCancel = () => {
+    resetForm();
   };
 
   // Delete blog
@@ -113,6 +184,7 @@ const AdminBlogs = () => {
       const updatedBlogs = blogs.filter((b) => b._id !== blogId);
       setBlogs(updatedBlogs);
       setSelectedBlog(updatedBlogs[0] || null);
+      alert("Blog deleted successfully!");
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Error deleting blog");
@@ -128,7 +200,10 @@ const AdminBlogs = () => {
           <div className="post-blog-btn-container">
             <button
               className="post-blog-btn"
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => {
+                setIsEditMode(false);
+                setShowForm(!showForm);
+              }}
             >
               {showForm ? "✕ Cancel" : "+ Create New Blog"}
             </button>
@@ -136,19 +211,21 @@ const AdminBlogs = () => {
 
           {/* Blog Form Modal */}
           {showForm && (
-            <div className="modal-overlay" onClick={() => setShowForm(false)}>
-              <form 
-                onSubmit={handlePostBlog} 
+            <div className="modal-overlay" onClick={handleCancel}>
+              <form
+                onSubmit={handleSubmitBlog}
                 className="blog-form"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Form Header */}
                 <div className="blog-form-header">
-                  <h2 className="blog-form-title">Create New Blog Post</h2>
+                  <h2 className="blog-form-title">
+                    {isEditMode ? "Edit Blog Post" : "Create New Blog Post"}
+                  </h2>
                   <button
                     type="button"
                     className="close-form-btn"
-                    onClick={() => setShowForm(false)}
+                    onClick={handleCancel}
                     aria-label="Close form"
                   >
                     ×
@@ -176,18 +253,25 @@ const AdminBlogs = () => {
 
                 {/* Media Upload */}
                 <div className="form-group">
-                  <label className="form-label">Featured Image/Video (Optional)</label>
+                  <label className="form-label">
+                    Featured Image/Video {isEditMode && "(Upload new to replace)"}
+                  </label>
                   <input
                     type="file"
                     accept="image/*,video/*"
                     onChange={(e) => setMedia(e.target.files[0])}
                     className="blog-file"
                   />
+                  {isEditMode && selectedBlog?.media && (
+                    <p style={{ color: "#999", fontSize: "12px", marginTop: "5px" }}>
+                      Current: {selectedBlog.media.split("/").pop()}
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit Button */}
                 <button type="submit" className="blog-submit-btn">
-                  Publish Blog Post
+                  {isEditMode ? "Update Blog Post" : "Publish Blog Post"}
                 </button>
               </form>
             </div>
@@ -241,12 +325,21 @@ const AdminBlogs = () => {
                     dangerouslySetInnerHTML={{ __html: selectedBlog.content }}
                   />
 
-                  <button
-                    className="delete-blog-btn"
-                    onClick={() => handleDeleteBlog(selectedBlog._id)}
-                  >
-                    🗑 Delete Blog
-                  </button>
+                  {/* ✅ Action Buttons Container */}
+                  <div className="blog-actions">
+                    <button
+                      className="edit-blog-btn"
+                      onClick={handleEditBlog}
+                    >
+                      ✏️ Edit Blog
+                    </button>
+                    <button
+                      className="delete-blog-btn"
+                      onClick={() => handleDeleteBlog(selectedBlog._id)}
+                    >
+                      🗑 Delete Blog
+                    </button>
+                  </div>
                 </article>
               ) : (
                 <div style={{ textAlign: "center", padding: "100px 20px", color: "#fff" }}>
